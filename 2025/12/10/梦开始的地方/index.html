@@ -26,14 +26,11 @@
 <script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
 
 
-<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
-<link
-    rel="stylesheet"
-    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
-/>
-<script src="/js/lib/highlight.js"></script>
 
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
 
 
 <script src="/js/lib/preview.js"></script>
@@ -166,6 +163,15 @@
             2025/12/10
         </span>
         
+        <span class="category">
+            <a href="/categories/%E7%AC%94%E8%AE%B0/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                笔记
+            </a>
+        </span>
+        
         
         <span class="tags">
             <span class="icon">
@@ -175,8 +181,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/others/" style="color: #00bcd4">
-                    others
+                <a href="/tags/Markdown/" style="color: #ffa2c4">
+                    Markdown
                 </a>
             </span>
             
@@ -185,7 +191,84 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="第一次写blog，先来试试MD语法"><a href="#第一次写blog，先来试试MD语法" class="headerlink" title="第一次写blog，先来试试MD语法"></a>第一次写blog，先来试试MD语法</h1><h2 id="这里是分割线"><a href="#这里是分割线" class="headerlink" title="这里是分割线"></a>这里是分割线</h2><hr>
+        <h1 id="第一次写blog，先来试试Markdown吧！"><a href="#第一次写blog，先来试试Markdown吧！" class="headerlink" title="第一次写blog，先来试试Markdown吧！"></a>第一次写blog，先来试试Markdown吧！</h1><hr>
+<p>Tip： </p>
+<ul>
+<li>要注意符号后留“空格”，这个是基本的语法。</li>
+<li>写完文段要习惯空行，空行可以用来分隔段落和元素。</li>
+<li>Markdown也支持使用html标签，因为Markdown就是为了转化为html，本文主要讲的是Markdown！<br>( <code># 标题</code> 经过解析器会转化为： <code>&lt;h1&gt;标题&lt;h1&gt;</code>)</li>
+</ul>
+<hr>
+<h1 id="标题"><a href="#标题" class="headerlink" title="标题:"></a>标题:</h1><p>#号前不能有字符（空格也算），几个#号就是几级标题，# 号和标题文字之间必须有一个空格。这是标准的 Markdown 语法要求。</p>
+<p>语法： <code># 标题 ## 标题 ### 标题 #### 标题 ##### 标题 ##### 标题</code>  </p>
+<p>示例： </p>
+<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6><h1 id="我是“-”标题"><a href="#我是“-”标题" class="headerlink" title="我是“&#x3D;&#x3D;&#x3D;”标题"></a>我是“&#x3D;&#x3D;&#x3D;”标题</h1><h2 id="我是“—”标题"><a href="#我是“—”标题" class="headerlink" title="我是“—”标题"></a>我是“—”标题</h2><p>(不建议使用)</p>
+<hr>
+<h1 id="文本格式"><a href="#文本格式" class="headerlink" title="文本格式"></a>文本格式</h1><h2 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h2><p>文本段落直接写就可以了。<br>换行的标准格式是用两个以上的空格加回车。<br>有些解析器只需要回车，不过尽量按照标准来吧，避免出错。  </p>
+<h2 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h2><p>粗体： 这是<strong>粗体</strong>（在文字两边加两个*号）<br>语法： <code>**文字**</code><br>斜体： 这是 <strong>斜体</strong> （在文字两边加两个“_”下划线）<br>语法： <code>__文字__</code><br>粗斜体： 这是 <em><strong>粗斜体</strong></em> 或者 <strong>这样</strong> （在文字两边加三个“ * ”或者下划线“ _ ”）<br>语法： <code>***粗斜体*** ___粗斜体___</code><br>推荐使用“ * ”，兼容性更好。  </p>
+<h2 id="分隔线"><a href="#分隔线" class="headerlink" title="分隔线"></a>分隔线</h2><p>有好几种方法：可以在一行中用三个以上星号，或者减号，或是下划线来建立分隔线。<br>语法：<code>*** --- ___</code><br>示例：你看到的分隔线都是。</p>
+<h2 id="删除线"><a href="#删除线" class="headerlink" title="删除线"></a>删除线</h2><p>在文字两端加波浪号~，要紧贴着，不需要加空格。<br>语法： <code>~~文字~~</code><br>示例： <del>像这样</del></p>
+<h2 id="下划线"><a href="#下划线" class="headerlink" title="下划线"></a>下划线</h2><p>用HTML的u标签。<br><u>像这样带下划线</u></p>
+<h2 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h2><p>就是在鼠标悬停在上边时会显示的，对文本的补充说明。<br>语法：<br><code>   [^要设置脚注的文字]</code><br><code>   [^要设置脚注的文字]: 脚注内容</code>  </p>
+<p>(脚注不是传统markdown语法，有些环境不支持，比如这里，下面的代码不会渲染)<br>示例：[^鼠标悬停在我上面试试]<br>[^鼠标悬停在我上面试试]: 我是脚注</p>
+<h2 id="行内代码标记"><a href="#行内代码标记" class="headerlink" title="行内代码标记"></a>行内代码标记</h2><p>用于标记文本中的代码,用反引号，如果标记的代码本身有反引号就用 <code>`` `code` ``</code> 嵌套。 以此类推增加反引号个数来显示更多反引号。  </p>
+<p>语法： <code>`code`</code><br>示例： <code>printf(&quot;hello world!&quot;);</code></p>
+<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><p>用三个反引号上下把代码包围起来可以显示代码块。</p>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">    我是第一行代码;</span><br><span class="line">    我是第二行;</span><br><span class="line">    如果想展示</span><br><span class="line"></span><br><span class="line">```</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><h2 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h2><p>这里是一个列表</p>
+<ul>
+<li>一个苹果<ul>
+<li>good apple（这是子列表）</li>
+<li>bad apple</li>
+</ul>
+</li>
+<li>两个柠檬</li>
+<li>三个欧润橘</li>
+</ul>
+<h2 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h2><ol>
+<li><p>有序列表需要用序号数字后加一个点并空一格 。  </p>
+</li>
+<li><p>语法:  </p>
+ <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 列表子项  </span><br><span class="line"><span class="bullet">2.</span> 列表子项  </span><br><span class="line"><span class="bullet">5.</span> 列表子项 </span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在数字序号顺序错误时会自动修正，这行子项序号就由5被修正为3了。</p>
+</li>
+</ol>
+<hr>
+<h1 id="引用块"><a href="#引用块" class="headerlink" title="引用块"></a>引用块</h1><h2 id="单块引用"><a href="#单块引用" class="headerlink" title="单块引用"></a>单块引用</h2><p>用于突出显示引用他人的信息。用一个<code>&gt;</code>后加一个空格即可。注意，‘&gt;’前面不能有东西。</p>
+<p>语法：<br><code>&gt; 所引用的内容</code>  </p>
+<p>示例:</p>
+<blockquote>
+<p>我们必须想象西西弗斯是幸福的。</p>
+</blockquote>
+<h2 id="多行引用"><a href="#多行引用" class="headerlink" title="多行引用"></a>多行引用</h2><p>只在第一行使用<code>&gt;</code>,其他行会自动包含。</p>
+<p>语法：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 这是多行引用,  </span><br><span class="line">这是第二行,</span><br><span class="line">第一行使用`&gt;`即可.  </span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<blockquote>
+<p>从前有座山：<br>山里有座庙。。。</p>
+</blockquote>
+<h2 id="引用嵌套"><a href="#引用嵌套" class="headerlink" title="引用嵌套"></a>引用嵌套</h2><p>不同个数的‘&gt;’，表示不同层级，直接换行嵌套即可。</p>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; 1</span><br><span class="line">&gt;</span><br><span class="line">&gt;&gt; 2</span><br><span class="line">&gt;&gt; </span><br><span class="line">&gt;&gt;&gt; 3</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<blockquote>
+<p>从前有座山，山里有座庙<br>庙里有个老和尚说：</p>
+<blockquote>
+<p>从前有座山，山里有座庙<br>庙里有个老和尚说：</p>
+<blockquote>
+<p>从前有座山，山里有座庙，<br>庙里。。。。。。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>引用块内可以包含几乎所有其他 Markdown 元素。可以自己试一试哦。</p>
 
     </div>
     

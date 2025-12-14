@@ -766,12 +766,15 @@ ol {
     margin: 15px 0;
 }
 pre {
-    border: 1px solid #ebeef5;
-    border-radius: 15px;
-    box-shadow: 0 2px 12px 0 #0000001a;
-    margin: 25px 0;
+    
+    /* border: 1px solid #ebeef5; */
+    /* border-radius: 15px; */
+    /* box-shadow: 0 2px 12px 0 #0000001a; */
+    margin: 0 0;
     overflow: hidden;
     white-space: normal;
+    padding: 5px 5px;
+
 }
 pre,
 code,
@@ -784,18 +787,18 @@ table:not(.hljs-ln) {
     margin: 15px 0;
 }
 table:not(.hljs-ln) td:nth-child(even) {
-    background: #c7e0fb4d;
+    background: #bddcf76b;
 }
 table:not(.hljs-ln) td:nth-child(odd) {
-    background: #d9e8ff4d;
+    background: #bddcf76b;
 }
 table:not(.hljs-ln) th {
-    background: #a3ddfb;
+    background: #bddcf76b;
 }
 table:not(.hljs-ln) tr th,
 table:not(.hljs-ln) tr td {
-    border-radius: 3px;
-    padding: 10px 20px;
+    border-radius: 8px;
+    padding: 10px 10px 10px 10px;
 }
 ul li,
 ol li {
