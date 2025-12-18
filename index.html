@@ -178,6 +178,73 @@
         
 
 <div class="post">
+    <a href="/2025/12/18/Emmet/">
+        <h2 class="post-title">Emmet</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/12/18
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="Emmet语法"><a href="#Emmet语法" class="headerlink" title="Emmet语法"></a>Emmet语法</h1><hr>
+<p>Emmet是一个插件，可以提高前端的代码效率它为HTML&#x2F;CSS&#x2F;XML提供了一套缩写，可以通过缩写生成。VSCode默认集成了Emmet。<strong>不会偷懒的程序员不是好程序员(✅)</strong></p>
+<hr>
+<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><h3 id="HTML框架"><a href="#HTML框架" class="headerlink" title="HTML框架"></a>HTML框架</h3><p>只需要输入<code>!</code>，再按一下tab就可以生成一个基本的框架。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><p>只输入标签名即可，按下tab，会补齐闭合的标签。</p>
+<p><code>br -&gt; &lt;br&gt;</code><br><code>h1 -&gt; &lt;h1&gt;&lt;/h1&gt;</code></p>
+<h3 id="元素嵌套"><a href="#元素嵌套" class="headerlink" title="元素嵌套"></a>元素嵌套</h3><p>使用<code>&gt;</code>实现元素嵌套<br><code>div&gt;ul&gt;li</code><br>效果如下：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="section">&lt;div&gt;</span></span><br><span class="line">        <span class="section">&lt;u&gt;</span></span><br><span class="line">            <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">        <span class="section">&lt;/u&gt;</span></span><br><span class="line"><span class="section">&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="生成重复元素"><a href="#生成重复元素" class="headerlink" title="生成重复元素"></a>生成重复元素</h3><p>使用<code>*</code>来生成多个元素，<code>*</code>表示乘，这里可以和上面写的列表连起来用。<br><code>div&gt;ul&gt;li*4</code><br>效果如下：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="section">&lt;div&gt;</span></span><br><span class="line">        <span class="section">&lt;ul&gt;</span></span><br><span class="line">            <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">            <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">            <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">            <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">        <span class="section">&lt;/ul&gt;</span></span><br><span class="line"><span class="section">&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="创建兄弟节点"><a href="#创建兄弟节点" class="headerlink" title="创建兄弟节点"></a>创建兄弟节点</h3><p>使用<code>+</code>来创建兄弟节点(同级的节点，并列关系)<br><code>div&gt;h2+p</code><br>效果如下：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="section">&lt;div&gt;</span></span><br><span class="line">        <span class="section">&lt;h2&gt;</span><span class="section">&lt;/h2&gt;</span></span><br><span class="line">        <span class="section">&lt;p&gt;</span><span class="section">&lt;/p&gt;</span></span><br><span class="line"><span class="section">&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="回到上一层"><a href="#回到上一层" class="headerlink" title="回到上一层"></a>回到上一层</h3><p>使用<code>^</code>回到上一层<br><code>div&gt;h2+ul&gt;li*3^p</code><br><ins>#从与<code>li</code>并列的那一层回到了与<code>ul</code>并列的那一层。</ins><br>效果如下：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="section">&lt;div&gt;</span></span><br><span class="line">        <span class="section">&lt;h2&gt;</span><span class="section">&lt;/h2&gt;</span></span><br><span class="line">        <span class="section">&lt;ul&gt;</span></span><br><span class="line">            <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">            <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">            <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">        <span class="section">&lt;/ul&gt;</span></span><br><span class="line">        <span class="section">&lt;p&gt;</span><span class="section">&lt;/p&gt;</span></span><br><span class="line"><span class="section">&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h3><p>使用<code>()</code>可以给元素分组。如果你想给两个元素同时<code>*</code>上n可以用<code>()</code>!这样更方便！<br><code>div&gt;(h2+p)*3</code><br>效果如下：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="section">&lt;div&gt;</span></span><br><span class="line">    <span class="section">&lt;p&gt;</span><span class="section">&lt;/p&gt;</span></span><br><span class="line">    <span class="section">&lt;h2&gt;</span><span class="section">&lt;/h2&gt;</span></span><br><span class="line">    <span class="section">&lt;p&gt;</span><span class="section">&lt;/p&gt;</span></span><br><span class="line">    <span class="section">&lt;h2&gt;</span><span class="section">&lt;/h2&gt;</span></span><br><span class="line">    <span class="section">&lt;p&gt;</span><span class="section">&lt;/p&gt;</span></span><br><span class="line">    <span class="section">&lt;h2&gt;</span><span class="section">&lt;/h2&gt;</span></span><br><span class="line"><span class="section">&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="添加ID、class和属性"><a href="#添加ID、class和属性" class="headerlink" title="添加ID、class和属性"></a>添加ID、class和属性</h3><ul>
+<li>ID用<code>#</code>表示。</li>
+<li>class用<code>.</code>表示。</li>
+<li>属性用<code>[]</code>包围起来。</li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/skill/" style="color: #ff7d73">skill</a>
+        </span>
+        
+    </div>
+    <a href="/2025/12/18/Emmet/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2025/12/10/%E6%A2%A6%E5%BC%80%E5%A7%8B%E7%9A%84%E5%9C%B0%E6%96%B9/">
         <h2 class="post-title">梦开始的地方</h2>
     </a>
@@ -404,7 +471,7 @@
         
         <span class="tag">
             
-            <a href="/tags/Markdown/" style="color: #03a9f4">Markdown</a>
+            <a href="/tags/Markdown/" style="color: #ff7d73">Markdown</a>
         </span>
         
     </div>

@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>Emmet | Luoのblog</title>
+    <meta name="author" content="Luo-36" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING...</h2>
+                    <!-- <p>加载过慢请开启缓存 浏览器默认开启</p> -->
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>LUOのBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;LUOのBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>Emmet</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/12/18
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/skill/" style="color: #ffa2c4">
+                    skill
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="Emmet语法"><a href="#Emmet语法" class="headerlink" title="Emmet语法"></a>Emmet语法</h1><hr>
+<p>Emmet是一个插件，可以提高前端的代码效率它为HTML&#x2F;CSS&#x2F;XML提供了一套缩写，可以通过缩写生成。VSCode默认集成了Emmet。<strong>不会偷懒的程序员不是好程序员(✅)</strong></p>
+<hr>
+<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><h3 id="HTML框架"><a href="#HTML框架" class="headerlink" title="HTML框架"></a>HTML框架</h3><p>只需要输入<code>!</code>，再按一下tab就可以生成一个基本的框架。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><p>只输入标签名即可，按下tab，会补齐闭合的标签。</p>
+<p><code>br -&gt; &lt;br&gt;</code><br><code>h1 -&gt; &lt;h1&gt;&lt;/h1&gt;</code></p>
+<h3 id="元素嵌套"><a href="#元素嵌套" class="headerlink" title="元素嵌套"></a>元素嵌套</h3><p>使用<code>&gt;</code>实现元素嵌套<br><code>div&gt;ul&gt;li</code><br>效果如下：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="section">&lt;div&gt;</span></span><br><span class="line">        <span class="section">&lt;u&gt;</span></span><br><span class="line">            <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">        <span class="section">&lt;/u&gt;</span></span><br><span class="line"><span class="section">&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="生成重复元素"><a href="#生成重复元素" class="headerlink" title="生成重复元素"></a>生成重复元素</h3><p>使用<code>*</code>来生成多个元素，<code>*</code>表示乘，这里可以和上面写的列表连起来用。<br><code>div&gt;ul&gt;li*4</code><br>效果如下：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="section">&lt;div&gt;</span></span><br><span class="line">        <span class="section">&lt;ul&gt;</span></span><br><span class="line">            <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">            <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">            <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">            <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">        <span class="section">&lt;/ul&gt;</span></span><br><span class="line"><span class="section">&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="创建兄弟节点"><a href="#创建兄弟节点" class="headerlink" title="创建兄弟节点"></a>创建兄弟节点</h3><p>使用<code>+</code>来创建兄弟节点(同级的节点，并列关系)<br><code>div&gt;h2+p</code><br>效果如下：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="section">&lt;div&gt;</span></span><br><span class="line">        <span class="section">&lt;h2&gt;</span><span class="section">&lt;/h2&gt;</span></span><br><span class="line">        <span class="section">&lt;p&gt;</span><span class="section">&lt;/p&gt;</span></span><br><span class="line"><span class="section">&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="回到上一层"><a href="#回到上一层" class="headerlink" title="回到上一层"></a>回到上一层</h3><p>使用<code>^</code>回到上一层<br><code>div&gt;h2+ul&gt;li*3^p</code><br><ins>#从与<code>li</code>并列的那一层回到了与<code>ul</code>并列的那一层。</ins><br>效果如下：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="section">&lt;div&gt;</span></span><br><span class="line">        <span class="section">&lt;h2&gt;</span><span class="section">&lt;/h2&gt;</span></span><br><span class="line">        <span class="section">&lt;ul&gt;</span></span><br><span class="line">            <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">            <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">            <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">        <span class="section">&lt;/ul&gt;</span></span><br><span class="line">        <span class="section">&lt;p&gt;</span><span class="section">&lt;/p&gt;</span></span><br><span class="line"><span class="section">&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h3><p>使用<code>()</code>可以给元素分组。如果你想给两个元素同时<code>*</code>上n可以用<code>()</code>!这样更方便！<br><code>div&gt;(h2+p)*3</code><br>效果如下：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="section">&lt;div&gt;</span></span><br><span class="line">    <span class="section">&lt;p&gt;</span><span class="section">&lt;/p&gt;</span></span><br><span class="line">    <span class="section">&lt;h2&gt;</span><span class="section">&lt;/h2&gt;</span></span><br><span class="line">    <span class="section">&lt;p&gt;</span><span class="section">&lt;/p&gt;</span></span><br><span class="line">    <span class="section">&lt;h2&gt;</span><span class="section">&lt;/h2&gt;</span></span><br><span class="line">    <span class="section">&lt;p&gt;</span><span class="section">&lt;/p&gt;</span></span><br><span class="line">    <span class="section">&lt;h2&gt;</span><span class="section">&lt;/h2&gt;</span></span><br><span class="line"><span class="section">&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="添加ID、class和属性"><a href="#添加ID、class和属性" class="headerlink" title="添加ID、class和属性"></a>添加ID、class和属性</h3><ul>
+<li>ID用<code>#</code>表示。</li>
+<li>class用<code>.</code>表示。</li>
+<li>属性用<code>[]</code>包围起来。</li>
+</ul>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2025 - 2025 Luoのblog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Luo-36
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
