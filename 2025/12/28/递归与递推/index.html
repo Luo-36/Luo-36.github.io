@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>递归与递推 | Luoのblog</title>
+    <meta name="author" content="Luo-36" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING...</h2>
+                    <!-- <p>加载过慢请开启缓存 浏览器默认开启</p> -->
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>LUOのBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;LUOのBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>递归与递推</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/12/28
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E7%AC%94%E8%AE%B0/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                笔记
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/algo/" style="color: #00bcd4">
+                    algo
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="第一课：一些准备和递归与递推"><a href="#第一课：一些准备和递归与递推" class="headerlink" title="第一课：一些准备和递归与递推"></a>第一课：一些准备和递归与递推</h1><hr>
+<h2 id="一些准备"><a href="#一些准备" class="headerlink" title="一些准备"></a>一些准备</h2><ul>
+<li>要会看时间复杂度分析来选用算法  </li>
+<li>DEV C++在编译选项加个 -std&#x3D;c++11就可以直接用scanf，printf。</li>
+<li>运算涉及到正整数除法可以等式两边同乘来规避浮点数。例如：n &#x3D; a + b&#x2F;c &#x3D;&gt; n * c &#x3D; a * c + b  </li>
+<li>std命名空间的使用与否<ul>
+<li>用了很方便，不用手动写std::，不过用了就会暴露在全局命名空间中。</li>
+<li>不用有利于规避命名冲突，便于知道变量名的由来。</li>
+</ul>
+</li>
+<li>常用的2的n次方的数值  <ul>
+<li>$2^{10}&#x3D;1024$  </li>
+<li>$2^{11}&#x3D;2048$  </li>
+<li>$2^{15}&#x3D;32768$  </li>
+<li>$2^{16}&#x3D;65536$</li>
+<li>$2^{20}\approx10^{6}$（1M（兆））  </li>
+<li>$2^{63}\approx10^{18}$</li>
+</ul>
+</li>
+<li>常用的四个头文件  <ul>
+<li>cstdio  （C标准库）</li>
+<li>cstring  （C字符串）</li>
+<li>iostream  （C++输入输出流）</li>
+<li>algorithm  （C++算法库：sort。。。）</li>
+</ul>
+</li>
+<li>空间的计算<ul>
+<li>1Byte(字节) &#x3D; 8bit(位)  </li>
+<li>char &#x3D; 1Byte &#x3D; 8bit  </li>
+<li>int &#x3D; float &#x3D; 4Byte &#x3D; 32bit  </li>
+<li>longlong &#x3D; double &#x3D;  8Byte &#x3D; 64bit</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="递归与DFS（深度优先搜索）"><a href="#递归与DFS（深度优先搜索）" class="headerlink" title="递归与DFS（深度优先搜索）"></a>递归与DFS（深度优先搜索）</h2><p>递归就是在一个函数里调用函数自身的编程手段。会产生一棵递归搜索树，在数据量较小的时候可以用，它的时间复杂度是指数级别的。如： $ O(2^n) $ 。  </p>
+<p>递归是把一个大问题分解成若干个子问题，得到子问题答案再层层返回求得大问题答案。</p>
+<p>DFS是一种算法。DFS优先沿着一条路径走到结尾再回溯到上一个节点，继续探索其他分支。在实现上主要由三部分组成：  </p>
+<ul>
+<li>结束条件  （到达底部）</li>
+<li>选择分支  </li>
+<li>状态恢复（回溯的时候用）</li>
+</ul>
+<p>思路（以dfs的搜索树为例）：  </p>
+<ol>
+<li>思考结束条件：到树底了该怎么判断，然后要做什么（输出结果之类的），最后记得 <strong>return</strong>。  </li>
+<li>思考选择分支：一个节点有几个分支（比如for循环一个个选过去），要如何处理（就是主要的函数实现，比如把选择的人存进数组），然后判断在哪里递归调用（选完了，递归调用进入下一层节点的选择）。  </li>
+<li>思考状态恢复：递归调用结束，要把递归的造成的影响复原，清除标记（如果有），复原状态（比如：状态数组）。</li>
+</ol>
+<h2 id="枚举-与-排列组合"><a href="#枚举-与-排列组合" class="headerlink" title="枚举 与 排列组合"></a>枚举 与 排列组合</h2><p>枚举是列出所有的可能结果。用DFS来枚举时，可以先暴力枚举（注意时间），然后再剪枝优化（考虑一些判断条件，不合法的直接return）。</p>
+<h2 id="递推"><a href="#递推" class="headerlink" title="递推"></a>递推</h2><p>递推是先知道子问题答案，再一步步求得大问题答案。（斐波那契先给出第一项和第二项从而求出后面的数就是）</p>
+<hr>
+<h1 id="几个c-函数"><a href="#几个c-函数" class="headerlink" title="几个c++函数"></a>几个c++函数</h1><ul>
+<li>next_permutation:是 C++ 标准库的函数，用于生成序列的下一个字典序排列。如果当前排列有下一个符合字典序的排列则生成下一个排列并返回<em>true</em>，如果是最后一个，则返回到第一个排列（升序）,并返回<em>false</em>。它定义在 &lt;algorithm&gt; 头文件中。  <ul>
+<li>用法： next_permutation(数组首地址,数组尾地址);  </li>
+<li>函数里面的两个参数本质是随机访问迭代器，指针天然有这个属性，直接用迭代器也可以。  </li>
+<li>这个函数会改变原数组，如果需要，要注意备份。  </li>
+<li>如果想要得到全部的符合字典序的排列，需要保证初始时为最小排列。  </li>
+<li>按字典序枚举：      <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line">std::vector&lt;<span class="type">int</span>&gt; seque = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">do</span> &#123;    <span class="comment">//这里用dowhile是为了输出第一个原始结果。</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i:seque)&#123; <span class="comment">//范围for循环，自动遍历容器</span></span><br><span class="line">            std::cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line">    &#125;<span class="keyword">while</span>(std::<span class="built_in">next_permutation</span>(seque.<span class="built_in">begin</span>(),seque.<span class="built_in">end</span>()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>memset：用于将一段内存区域设置为指定的值。可以用于大量初始化为0或<em>特定值</em>。<ul>
+<li>函数原型：void* memset(void* ptr, int value, size_t num);</li>
+<li>ptr:起始地址 value:设置的值 num:设置的字节数</li>
+<li>头文件依赖：cstring（c++）string.h(c)</li>
+<li>常用设置所有字节：<code>memset(arr,0,sizeof(arr)); //全数组设置为0</code></li>
+</ul>
+</li>
+<li>memcpy： 用于内存数据拷贝，是以二进制的方式，无需关心数据类型。<ul>
+<li>函数原型：void *memcpy(void *dest, const void *src, size_t n);</li>
+<li>dest:目标内存地址 src:源内存地址 n:要复制的字节数</li>
+<li>头文件依赖：cstring（c++）string.h(c)</li>
+<li>完整复制一个数组：<code>memcpy(destArr,srcArr,sizeof(srcArr));</code></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2025 - 2026 Luoのblog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Luo-36
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

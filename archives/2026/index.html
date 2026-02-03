@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>Tags: skill | Luoのblog</title>
+    <title>Archives | Luoのblog</title>
     <meta name="author" content="Luo-36" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -36,6 +36,8 @@
 <script src="/js/lib/preview.js"></script>
 
 
+
+<script src="/js/lib/search.js"></script>
 
 
 
@@ -147,88 +149,157 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
+            
+<div id="archives">
     
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/tags/skill/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                skill
-            </a>
-        </span>
-        
-        
-        
-        
-        
-        <span>
-            <a href="/tags/Markdown/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                Markdown
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/algo/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                algo
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/note/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                note
-            </a>
-        </span>
-        
-        
-    </div>
+    <input id="search-bar" class="input" placeholder="搜索" v-model="rawSearch" />
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/12/18</div>
-            <a href="/2025/12/18/Emmet/">
-                <h3>Emmet</h3>
-            </a>
-            <div class="info">
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
+    <div id="timeline-wrap" ref="timeline">
+        
+        <div class="timeline" data-title="梦开始的地方">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2025/12/10</div>
+                <a href="/2025/12/10/%E6%A2%A6%E5%BC%80%E5%A7%8B%E7%9A%84%E5%9C%B0%E6%96%B9/">
+                    <h3>梦开始的地方</h3>
+                </a>
+                <div class="info">
                     
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/skill/" style="color: #00a596">
-                            skill
+                    <span class="category">
+                        <a href="/categories/%E7%AC%94%E8%AE%B0/">
+                            <span class="icon">
+                                <i class="fa-solid fa-bookmark fa-fw"></i>
+                            </span>
+                            笔记
                         </a>
                     </span>
                     
-                </span>
-                
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </span>
+                        
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Markdown/" style="color: #ff7d73">
+                                Markdown
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
             </div>
         </div>
+        
+        <div class="timeline" data-title="emmet">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2025/12/18</div>
+                <a href="/2025/12/18/Emmet/">
+                    <h3>Emmet</h3>
+                </a>
+                <div class="info">
+                    
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </span>
+                        
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/skill/" style="color: #00a596">
+                                skill
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline" data-title="递归与递推">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2025/12/28</div>
+                <a href="/2025/12/28/%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E6%8E%A8/">
+                    <h3>递归与递推</h3>
+                </a>
+                <div class="info">
+                    
+                    <span class="category">
+                        <a href="/categories/%E7%AC%94%E8%AE%B0/">
+                            <span class="icon">
+                                <i class="fa-solid fa-bookmark fa-fw"></i>
+                            </span>
+                            笔记
+                        </a>
+                    </span>
+                    
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </span>
+                        
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/algo/" style="color: #ffa2c4">
+                                algo
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline" data-title="回写入门题收获">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2026/2/3</div>
+                <a href="/2026/02/03/%E5%9B%9E%E5%86%99%E5%85%A5%E9%97%A8%E9%A2%98%E6%94%B6%E8%8E%B7/">
+                    <h3>回写入门题收获</h3>
+                </a>
+                <div class="info">
+                    
+                    <span class="category">
+                        <a href="/categories/%E7%AC%94%E8%AE%B0/">
+                            <span class="icon">
+                                <i class="fa-solid fa-bookmark fa-fw"></i>
+                            </span>
+                            笔记
+                        </a>
+                    </span>
+                    
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </span>
+                        
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/note/" style="color: #ff7d73">
+                                note
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
     </div>
-    
 </div>
 
             <footer id="footer">
