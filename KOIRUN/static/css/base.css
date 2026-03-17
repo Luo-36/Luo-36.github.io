@@ -16,7 +16,7 @@
     width: 40px;
     height: 60px;
     /* background-color: chartreuse; */
-    background: url("/static/img/koiRun.gif");
+    background: url("./static/img/koiRun.gif");
     position: absolute;
     bottom: 0px;
     left: 30px;
