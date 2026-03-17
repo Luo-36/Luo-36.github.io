@@ -1,0 +1,65 @@
+/*游戏窗口和背景*/
+#game {  
+    width:800px;
+    height: 400px;
+    border: 3px solid black;
+
+    position: relative;
+    display: flex;
+    justify-self: center;
+
+    background-color: rgb(131, 235, 152);
+
+}
+
+#KOI {
+    width: 40px;
+    height: 60px;
+    /* background-color: chartreuse; */
+    background: url("/static/img/koiRun.gif");
+    position: absolute;
+    bottom: 0px;
+    left: 30px;
+}
+
+#block {
+    width: 20px;
+    height: 15px;
+    background-color: black;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+
+}
+
+#score {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin-top: 5px;
+    margin-right: 20px;
+}
+
+#introduction {
+    position: relative;
+    bottom: 10px;
+    display: flex;
+    justify-self: center;
+    font-size: 35px;
+}
+
+#bg {
+    background-color: rgb(0, 0, 0);
+    width: 100%;
+    height: 100%;
+}
+
+#title {
+    display: block;
+    font-size: 100px;
+    position: relative;
+    left: 50px;
+    bottom: 50px;
+    
+}
+

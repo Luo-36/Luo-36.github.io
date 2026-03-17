@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>回写入门题记录 | Luoのblog</title>
+    <title>写一些题目的记录 | Luoのblog</title>
     <meta name="author" content="Luo-36" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -153,7 +153,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>回写入门题记录</h1>
+        <h1>写一些题目的记录</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -181,7 +181,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/other/" style="color: #03a9f4">
+                <a href="/tags/other/" style="color: #00a596">
                     other
                 </a>
             </span>
@@ -196,16 +196,69 @@
 <p><strong>&lt;iomanip&gt;</strong> 是 <strong>C++标准库</strong> 中的一个头文件，它提供了对输入&#x2F;输出流的格式化操作。iomanip 库中的函数允许开发者控制输出格式，如设置小数点后的位数、设置宽度、对齐方式等。iomanip 是 Input&#x2F;Output Manipulators 的缩写，它提供了一组操作符，用于控制 C++ 标准库中的输入&#x2F;输出流的格式。  </p>
 </blockquote>
 <p>一些示例：<br><strong>1.设置精度</strong><br>使用 setprecision 可以设置设置浮点数的有效位数。（precision 精度）</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">double</span> pi = <span class="number">3.141592653589793</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Default: &quot;</span> &lt;&lt; pi &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Set precision (3): &quot;</span> &lt;&lt; std::<span class="built_in">setprecision</span>(<span class="number">3</span>) &lt;&lt; pi &lt;&lt; <span class="string">&quot;\n&quot;</span>;<span class="comment">//保留三位有效位</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Set precision (7): &quot;</span> &lt;&lt; std::<span class="built_in">setprecision</span>(<span class="number">7</span>) &lt;&lt; pi &lt;&lt; <span class="string">&quot;\n&quot;</span>;<span class="comment">//保留7位有效位</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">double</span> pi = <span class="number">3.141592653589793</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Default: &quot;</span> &lt;&lt; pi &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Set precision (3): &quot;</span> &lt;&lt; std::<span class="built_in">setprecision</span>(<span class="number">3</span>) &lt;&lt; pi &lt;&lt; <span class="string">&quot;\n&quot;</span>;  <span class="comment">//保留三位有效位</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Set precision (7): &quot;</span> &lt;&lt; std::<span class="built_in">setprecision</span>(<span class="number">7</span>) &lt;&lt; pi &lt;&lt; <span class="string">&quot;\n&quot;</span>;  <span class="comment">//保留7位有效位</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>输出：</p>
 <figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Default</span>: <span class="number">3</span>.<span class="number">14159</span></span><br><span class="line"><span class="attribute">Set</span> precision (<span class="number">3</span>): <span class="number">3</span>.<span class="number">14</span></span><br><span class="line"><span class="attribute">Set</span> precision (<span class="number">7</span>): <span class="number">3</span>.<span class="number">141593</span></span><br></pre></td></tr></table></figure>
+
 <p><strong>2.固定小数点和科学计数法</strong><br>fixed 和 scientific 可以控制浮点数的输出格式。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">double</span> num = <span class="number">123456789.0</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Fixed: &quot;</span> &lt;&lt; std::fixed &lt;&lt; num &lt;&lt; std::endl; <span class="comment">//</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Scientific: &quot;</span> &lt;&lt; std::scientific &lt;&lt; num &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">double</span> num = <span class="number">123456789.0</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Fixed: &quot;</span> &lt;&lt; std::fixed &lt;&lt; num &lt;&lt; std::endl;  <span class="comment">//默认固定小数点后六位</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Fixed: &quot;</span> &lt;&lt; std::fixed &lt;&lt; <span class="built_in">setprecision</span>(<span class="number">3</span>) &lt;&lt; num &lt;&lt; std::endl;  <span class="comment">//保留小数点后三位</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Scientific: &quot;</span> &lt;&lt; std::scientific &lt;&lt; num &lt;&lt; std::endl;  <span class="comment">//科学计数法表示</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Fixed</span>: <span class="number">123456789</span>.<span class="number">000000</span></span><br><span class="line"><span class="attribute">Scientific</span>: <span class="number">1</span>.<span class="number">23456789</span>e+<span class="number">08</span></span><br></pre></td></tr></table></figure>
 
+<p><strong>3.设置宽度和填充</strong><br>使用 setw 可以设置输出的宽度。如果输出内容的字符数少于设置的宽度，剩余部分将默认用空格填充。<br>使用 setfill 可以设置填充字符，通常与 setw 一起使用。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">setw</span>(<span class="number">10</span>) &lt;&lt; <span class="string">&quot;Hello&quot;</span> &lt;&lt; std::endl;  <span class="comment">//输出宽度10，剩余用空格填充</span></span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">setfill</span>(<span class="string">&#x27;*&#x27;</span>) &lt;&lt; std::<span class="built_in">setw</span>(<span class="number">10</span>) &lt;&lt; <span class="string">&quot;World&quot;</span> &lt;&lt; std::endl;  <span class="comment">//输出宽度10，剩余用&#x27;*&#x27;填充</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/cplusplus/cpp-libs-iomanip.html">来源</a></p>
 <hr>
-<h2 id="库-1"><a href="#库-1" class="headerlink" title="&lt;cmath&gt;库"></a>&lt;cmath&gt;库</h2><hr>
+<h2 id="库-1"><a href="#库-1" class="headerlink" title="&lt;cmath&gt;库"></a>&lt;cmath&gt;库</h2><blockquote>
+<p>C++ 标准库提供了丰富的功能，其中 &lt;cmath&gt; 是一个包含数学函数的头文件，它提供了许多基本的数学运算和常数。&lt;cmath&gt; 是 C++ 标准库中的一个头文件，它定义了一组数学函数，这些函数可以执行基本的数学运算，如幂运算、三角函数、对数、绝对值等。</p>
+</blockquote>
+<p>常用：</p>
+<ul>
+<li>abs(x) 返回整数x的绝对值  </li>
+<li>fabs(x) 返回浮点数x的绝对值</li>
+<li>fmax(x,y)、fmin(x,y) 比较x和y返回较大（小）值</li>
+<li>pow(x,y) 计算 x 的 y 次方</li>
+<li>sqrt(x) 计算 x 的平方根</li>
+<li>cbrt(x) 计算 x 的立方根</li>
+<li>ceil(x) 返回不小于 x 的最小整数（向上取整）</li>
+<li>floor(x) 返回不大于 x 的最大整数（向下取整）</li>
+<li>round(x) 返回四舍五入到最接近的整数</li>
+<li>lround(x) 返回四舍五入到 long 类型</li>
+<li>llround(x) 返回四舍五入到 long long 类型</li>
+<li>sin(x)</li>
+<li>cos(x)</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/cplusplus/cpp-libs-cmath.html">来源</a></p>
+<hr>
+<h1 id="素数筛"><a href="#素数筛" class="headerlink" title="素数筛"></a>素数筛</h1><blockquote>
+<p>素数(质数)是指在大于 1 的<strong>自然数</strong>中，除了 1 和它本身以外不再有其他因数的自然数。  </p>
+</blockquote>
+<ol>
+<li>素数是自然数，是整数。</li>
+<li>素数大于1  </li>
+<li>素数只有1和它本身两个因数  </li>
+<li>最小素数是2</li>
+</ol>
+<h2 id="试除法"><a href="#试除法" class="headerlink" title="试除法"></a>试除法</h2><p> 思想：直接一个一个除过去</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//传入一个数，判断是不是素数。（n为传入的数）</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">is_prime</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//小于等于1的不是素数 </span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i * i &lt;= n; i++) &#123; <span class="comment">//从2开始，试除到n的开方</span></span><br><span class="line">        <span class="keyword">if</span> (n % i == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//因为如果一个数不是素数，它的两个因数一定不会同时大于该数的开方（一大一小或两个相等）。只需要找到其中的一个因数就可以，故试除到该数的开方。（可以用sqrt(n),这里用i*i来等效替代）</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="埃式筛（埃拉托斯特尼筛法）"><a href="#埃式筛（埃拉托斯特尼筛法）" class="headerlink" title="埃式筛（埃拉托斯特尼筛法）"></a>埃式筛（埃拉托斯特尼筛法）</h2><p>思想：<strong>素数的整数倍一定是合数</strong>，在一个自然数集合里，只需要把所有合数标记出来，剩下的都是素数了。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="comment">//这里的n就是要判断是否为素数的数</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">bool</span>&gt; <span class="title">isPrime</span><span class="params">(n<span class="number">+1</span>,<span class="literal">true</span>)</span></span>; </span><br><span class="line"><span class="comment">//创建一个bool数组来标记素数，假设一开始都是。（到n，形成了一个自然数集合，这里用n+1是因为我们的下标对应相应的自然数）</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> p=<span class="number">2</span>; p*p&lt;=n; p++)&#123; </span><br><span class="line">    <span class="comment">//从2开始，一个个查过去（和试除法一样）</span></span><br><span class="line">    <span class="keyword">if</span>(isPrime[p])&#123; </span><br><span class="line">        <span class="comment">//如果是素数，标记素数的整数倍</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=p*p; i&lt;=n; i+=p) isPrime[i] = <span class="literal">false</span>; <span class="comment">//i从p*p开始</span></span><br><span class="line">        <span class="comment">//为什么呢？我们先看3，要把3的整数倍筛掉，有3*2、3*3、3*4。。。</span></span><br><span class="line">        <span class="comment">//注意到了吗？3*2其实就是2*3！那我们如果没有从p*p开始，那这个就会被重复标记，浪费了时间和性能。</span></span><br><span class="line">        <span class="comment">//也就是说，从素数的平方开始标记可以避免“部分”重复标记前面的素数的整数倍标记过的</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>埃式筛还是会重复标记一些已经筛过的素数，所以接下来我们看看欧拉筛。</p>
+<h2 id="欧拉筛（线性筛）"><a href="#欧拉筛（线性筛）" class="headerlink" title="欧拉筛（线性筛）"></a>欧拉筛（线性筛）</h2><p>思想：任何大于1的正整数n都可以唯一分解为有限个素数的乘积。任何合数都有它对应的一个最小质因子。可以通过这个最小质因子将其标记，这样可以避免重复标记。（整数唯一分解定理）</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="type">bool</span>&gt; <span class="title">isPrime</span><span class="params">(n<span class="number">+1</span>,<span class="literal">true</span>)</span></span>;  </span><br><span class="line"><span class="comment">//初始化用于标记的数组，假设都是素数</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; primes; </span><br><span class="line"><span class="comment">//用于存储素数的数组（待会用于当作最小质因数进行筛选）</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>; i&lt;n; i++)&#123; </span><br><span class="line">    <span class="comment">//遍历到n</span></span><br><span class="line">    <span class="keyword">if</span>(isPrime[i])  primes.<span class="built_in">puck_back</span>(i);  </span><br><span class="line">    <span class="comment">//如果当前数是素数将其尾插入素数数组</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; (j &lt; primes.<span class="built_in">size</span>()  &amp;&amp;  i*primes[j] &lt;= n); j++)&#123;  </span><br><span class="line">        <span class="comment">//不能超过素数数组长度，且当前数与素数的积不会超过n。</span></span><br><span class="line">        isPrime[i*primes[j]] = <span class="literal">false</span>;   </span><br><span class="line">        <span class="comment">//从现有的素数数组开始（从下标0开始），以当前数作为倍数，将素数的倍数标记为合数</span></span><br><span class="line">        <span class="keyword">if</span>(i % primes[j] == <span class="number">0</span>) <span class="keyword">break</span>;   </span><br><span class="line">        <span class="comment">//如果当前数是素数的倍数则直接跳出循环（说明i*primes[j+1]以及之后的数已经被前面更小的质因数筛过了）</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>总结一下就是先把所有数标记为素数。从2开始找，遇到素数就加进素数数组，然后用当前的数作为倍数，分别乘上<strong>所有</strong>目前已经知道的素数，并将其标记为合数，直到走到n-1。</li>
+<li>比如当前数是2，2是素数，这样就将2放入素数数组，并将目前素数数组里的素数（目前只有2）作为质因子，以当前数为倍数，筛掉合数。素数数组里的素数就是作为最小质因子。（每个数的最小质因子只有一个，4的最小质因子是2，6的最小质因子也是2，他们都只会被素数数组里的“2”筛掉，这样就不会重复筛）</li>
+</ul>
+<hr>
+<h1 id="一些写题注意事项"><a href="#一些写题注意事项" class="headerlink" title="一些写题注意事项"></a>一些写题注意事项</h1><ul>
+<li>数组长度可以设稍大一些，防止越界（比如字符串输入末尾的’\0’）</li>
+<li>当你需要一个依赖输入的vector时，可以先声明，再分配内存。这样可以防止越界。防止越界很重要。看到数组要小心越界。特别在循环里，一个变量++遍历时可以考虑XXX.size()来判断</li>
+</ul>
+<hr>
 
     </div>
     
