@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>回写入门题收获 | Luoのblog</title>
+    <title>回写入门题记录 | Luoのblog</title>
     <meta name="author" content="Luo-36" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -153,7 +153,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>回写入门题收获</h1>
+        <h1>回写入门题记录</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -181,8 +181,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/note/" style="color: #ffa2c4">
-                    note
+                <a href="/tags/other/" style="color: #03a9f4">
+                    other
                 </a>
             </span>
             
@@ -191,7 +191,21 @@
     </div>
     
     <div class="content" v-pre>
-        <p>he</p>
+        <h1 id="C-库"><a href="#C-库" class="headerlink" title="C++库"></a>C++库</h1><hr>
+<h2 id="库"><a href="#库" class="headerlink" title="&lt;iomanip&gt;库"></a>&lt;iomanip&gt;库</h2><blockquote>
+<p><strong>&lt;iomanip&gt;</strong> 是 <strong>C++标准库</strong> 中的一个头文件，它提供了对输入&#x2F;输出流的格式化操作。iomanip 库中的函数允许开发者控制输出格式，如设置小数点后的位数、设置宽度、对齐方式等。iomanip 是 Input&#x2F;Output Manipulators 的缩写，它提供了一组操作符，用于控制 C++ 标准库中的输入&#x2F;输出流的格式。  </p>
+</blockquote>
+<p>一些示例：<br><strong>1.设置精度</strong><br>使用 setprecision 可以设置设置浮点数的有效位数。（precision 精度）</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">double</span> pi = <span class="number">3.141592653589793</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Default: &quot;</span> &lt;&lt; pi &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Set precision (3): &quot;</span> &lt;&lt; std::<span class="built_in">setprecision</span>(<span class="number">3</span>) &lt;&lt; pi &lt;&lt; <span class="string">&quot;\n&quot;</span>;<span class="comment">//保留三位有效位</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Set precision (7): &quot;</span> &lt;&lt; std::<span class="built_in">setprecision</span>(<span class="number">7</span>) &lt;&lt; pi &lt;&lt; <span class="string">&quot;\n&quot;</span>;<span class="comment">//保留7位有效位</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Default</span>: <span class="number">3</span>.<span class="number">14159</span></span><br><span class="line"><span class="attribute">Set</span> precision (<span class="number">3</span>): <span class="number">3</span>.<span class="number">14</span></span><br><span class="line"><span class="attribute">Set</span> precision (<span class="number">7</span>): <span class="number">3</span>.<span class="number">141593</span></span><br></pre></td></tr></table></figure>
+<p><strong>2.固定小数点和科学计数法</strong><br>fixed 和 scientific 可以控制浮点数的输出格式。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">double</span> num = <span class="number">123456789.0</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Fixed: &quot;</span> &lt;&lt; std::fixed &lt;&lt; num &lt;&lt; std::endl; <span class="comment">//</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Scientific: &quot;</span> &lt;&lt; std::scientific &lt;&lt; num &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h2 id="库-1"><a href="#库-1" class="headerlink" title="&lt;cmath&gt;库"></a>&lt;cmath&gt;库</h2><hr>
 
     </div>
     

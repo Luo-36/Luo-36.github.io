@@ -487,7 +487,10 @@
     line-height: 2;
     overflow: auto;
     padding: 50px 30px 20px;
-    white-space: pre;
+    white-space: pre-wrap;
+     word-wrap: break-word;  /* 重要：允许在单词中断处换行 */
+    word-break: break-all;  /* 重要：允许在任何字符处换行 */
+    
 }
 .comment iframe,
 body::-webkit-scrollbar-track {
@@ -771,10 +774,14 @@ pre {
     /* border-radius: 15px; */
     /* box-shadow: 0 2px 12px 0 #0000001a; */
     margin: 0 0;
-    overflow: hidden;
-    white-space: normal;
-    padding: 1em 1em;
-
+    overflow: auto;
+    white-space: pre-wrap;  /*缩进并换行*/
+    word-wrap: break-word;  /* 重要：允许在单词中断处换行 */
+    word-break: break-all;  /* 重要：允许在任何字符处换行 */
+    max-width: 100%; /* 可选，确保不超过父容器 */
+    box-sizing: border-box; /* 新增 */
+    padding: 1em 10px;
+    
 }
 pre,
 code,
@@ -783,6 +790,7 @@ code,
 .language {
     font-family: "Fira Code", "Noto Sans SC", monospace;
 }
+
 table:not(.hljs-ln) {
     margin: 15px 0;
 }
