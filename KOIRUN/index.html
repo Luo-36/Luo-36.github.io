@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./static/css/base.css">
 </head>
 <body>
+    <h1 style="font-size: 50px; padding-left: 30px; ">KoiRun</h1>
+    <hr style="margin: 20px 0px;">
     <div id="game" tabindex="-1">
         <div id="KOI"></div>
         <div id="block"></div>
@@ -20,7 +22,9 @@
         <p>按“R”开始游戏</p>
         <p>---按空格跳跃</p>
     </div>
-    <div id="scoreList"></div>
+    <hr>
+    <h2>历史分数：</h2>
+    <div style="font-size: 30px;padding-left: 40px;"  id="scoreList"></div>
     <script type="module">
         import { main } from "./static/js/base.js";
         main();

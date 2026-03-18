@@ -12,6 +12,13 @@ function main () {
     let animationKOI = null;
     let Start = 0;
     
+     window.addEventListener('keydown', function(e) {
+    if (e.key === ' ' || e.key === 'Spacebar') {
+    e.preventDefault(); // 阻止默认的滚动行为
+    }
+    });
+    resetGame();
+
     $game.addEventListener("keydown",function(event){
         console.log(event.code);
         if(event.code =="KeyR"){
@@ -22,7 +29,6 @@ function main () {
     $game.addEventListener("keydown",function(event){
         //已经点了就不会继续向上了
         // console.log(event.code);
-
         if(animationKOI)  {
             // console.log(animationKOI);
             return; 
@@ -30,6 +36,8 @@ function main () {
         if(!Start) return;
 
         if(event.code=="Space"){
+            event.preventDefault(); // 阻止默认滚动行为
+            event.stopPropagation();
             let up = function(){
                 speed -= acceleration;
                 
@@ -194,17 +202,23 @@ function main () {
             console.error('未找到分数列表容器 scoreList');
             return;
         }
+        //ScoreContainer.innerHTML = '';
         
         // 4. 修复数组存储逻辑（原逻辑会跳过下标 0，且未挂载到 DOM）
         const rankItem = document.createElement('p');
         rankItem.textContent = `${Scoreindex}: ${score}`; // 加空格优化显示
-        // 5. 将创建的 p 标签挂载到页面容器中（核心缺失步骤）
-        $rank.appendChild(rankItem);
+        // 5. 将创建的 p 标签挂载到页面容器中
+        //$rank.appendChild(rankItem);
         
         // 6. 存储到数组（可选，仅需记录时用）
         ScoreList.push(rankItem);
+        ScoreList.sort();
         // 7. 索引自增
         Scoreindex++;
+
+        ScoreList.forEach(element => {
+            $rank.appendChild(rankItem);
+        });
     }
 
 
@@ -225,7 +239,7 @@ function main () {
         }
     }
 
-
+   
 }
 
 
