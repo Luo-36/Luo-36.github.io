@@ -175,81 +175,208 @@
     true
 >
     <div id="home-posts">
-        <%
-    let posts = site.posts,
-        current = (page.current - 1) * config.index_generator.per_page;
-    posts.data.sort((a, b) => {
-        let x = a.pinned ?? 0,
-            y = b.pinned ?? 0;
-        return x === y ? b.date - a.date : y - x;
-    });
-    posts = posts.slice(current, config.index_generator.per_page + current);
-%>
-<% posts.forEach((post) => { %>
+        
+
 <div class="post">
-    <a href="<%- url_for(post.path) %>">
-        <h2 class="post-title"><%= post.title %></h2>
+    <a href="/2026/02/03/%E5%9B%9E%E5%86%99%E5%85%A5%E9%97%A8%E9%A2%98%E6%94%B6%E8%8E%B7/">
+        <h2 class="post-title">写一些题目的记录</h2>
     </a>
     <div class="category-and-date">
-        <% if (post.categories.data.length !== 0) { %>
+        
         <span class="category">
-            <a href="<%- url_for(post.categories.data[0].path) %>">
+            <a href="/categories/%E7%AC%94%E8%AE%B0/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                <%= post.categories.data[0].name %>
+                笔记
             </a>
         </span>
-        <% } %>
+        
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            <%- date(post.date, "YYYY/M/D") %>
+            2026/2/3
         </span>
-        <% if (theme.crypto.enable && typeof post.secret !== "undefined") { %>
-        <span class="special">
-            <i class="fa-solid fa-lock fa-fw"></i>
-        </span>
-        <% } %>
-        <% if (typeof post.pinned !== "undefined") { %>
-        <span class="special">
-            <i class="fa-solid fa-grip-vertical fa-fw"></i>
-        </span>
-        <% } %>
+        
+        
     </div>
     <div class="description">
         <div class="content" v-pre>
-            <% if (typeof post.description !== "undefined") { %>
-            <%- markdown(post.description) %>
-            <% } else if (post.excerpt) { %>
-            <%- post.excerpt %>
-            <% } else { %>
-            <%- post.content %>
-            <% } %>
+            
+            <!-- 最后强制截断全文（取前200字符，避免显示全文） -->
+            <h1 id="C-库"><a href="#C-库" class="headerlink" title="C++库"></a>C++库</h1><hr>
+<h2 id="库"><a href="#库" class="headerlink" title="&lt;iomanip&gt;库"></a>&lt;iomanip&gt;库</h2><blockquote>
+<p><strong>&lt;i...
+            
         </div>
     </div>
     <div class="post-tags">
-        <% if (post.tags.data.length !== 0) { %>
+        
         <span class="icon">
             <i class="fa-solid fa-tags fa-fw"></i>
         </span>
-        <% } %>
-        <% let prev; %>
-        <% post.tags.data.forEach((tag) => { %>
+        
+        
+        
         <span class="tag">
-            <%
-                const colors = theme.colors.filter((color) => color !== prev);
-                let id = Math.floor(Math.random() * colors.length);
-                prev = colors[id];
-            %>
-            <a href="<%- url_for(tag.path) %>" style="color: <%- colors[id] %>"><%= tag.name %></a>
+            
+            <a href="/tags/other/" style="color: #00bcd4">other</a>
         </span>
-        <% }); %>
+        
     </div>
-    <a href="<%- url_for(post.path) %>" class="go-post">阅读全文</a>
+    <!-- 保留“阅读全文”按钮 -->
+    <a href="/2026/02/03/%E5%9B%9E%E5%86%99%E5%85%A5%E9%97%A8%E9%A2%98%E6%94%B6%E8%8E%B7/" class="go-post">阅读全文</a>
 </div>
-<% }); %>
+
+<div class="post">
+    <a href="/2025/12/28/%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E6%8E%A8/">
+        <h2 class="post-title">递归与递推</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%AC%94%E8%AE%B0/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                笔记
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/12/28
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <!-- 最后强制截断全文（取前200字符，避免显示全文） -->
+            <h1 id="第一课：一些准备和递归与递推"><a href="#第一课：一些准备和递归与递推" class="headerlink" title="第一课：一些准备和递归与递推"></a>第一课：一些准备和递归与递推</h1><hr>
+<h2 id="一些准备"><a href="#一些准备" class="headerlink" title="一些准备"></a>一些准备</h2><ul>
+...
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/algo/" style="color: #00bcd4">algo</a>
+        </span>
+        
+    </div>
+    <!-- 保留“阅读全文”按钮 -->
+    <a href="/2025/12/28/%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E6%8E%A8/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2025/12/18/Emmet/">
+        <h2 class="post-title">Emmet</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/12/18
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <!-- 最后强制截断全文（取前200字符，避免显示全文） -->
+            <h1 id="Emmet语法"><a href="#Emmet语法" class="headerlink" title="Emmet语法"></a>Emmet语法</h1><hr>
+<p>Emmet是一个插件，可以提高前端的代码效率它为HTML&#x2F;CSS&#x2F;XML提供了一套缩写，可以通过缩写生成。VSCode默认集成了Emmet。</p>
+<hr>
+<h2 id="HTML"><...
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/skill/" style="color: #00a596">skill</a>
+        </span>
+        
+    </div>
+    <!-- 保留“阅读全文”按钮 -->
+    <a href="/2025/12/18/Emmet/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2025/12/10/%E6%A2%A6%E5%BC%80%E5%A7%8B%E7%9A%84%E5%9C%B0%E6%96%B9/">
+        <h2 class="post-title">梦开始的地方</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%AC%94%E8%AE%B0/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                笔记
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/12/10
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <!-- 最后强制截断全文（取前200字符，避免显示全文） -->
+            <h1 id="第一次写blog，先来试试Markdown吧！"><a href="#第一次写blog，先来试试Markdown吧！" class="headerlink" title="第一次写blog，先来试试Markdown吧！"></a>第一次写blog，先来试试Markdown吧！</h1><hr>
+<p>Tip： </p>
+<ul>
+<li>要注意符号后留“空格”，这个是基本的语法。<...
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Markdown/" style="color: #00bcd4">Markdown</a>
+        </span>
+        
+    </div>
+    <!-- 保留“阅读全文”按钮 -->
+    <a href="/2025/12/10/%E6%A2%A6%E5%BC%80%E5%A7%8B%E7%9A%84%E5%9C%B0%E6%96%B9/" class="go-post">阅读全文</a>
+</div>
 
         <div class="page-current">
     
