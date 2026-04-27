@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>Categories: 笔记 | Luoのblog</title>
+    <title>let-const-var和TDZ | Luoのblog</title>
     <meta name="author" content="Luo-36" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -34,6 +34,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -147,139 +151,87 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/categories/%E7%AC%94%E8%AE%B0/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                笔记
-            </a>
+            <div class="article">
+    <div>
+        <h1>let-const-var和TDZ</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/26
         </span>
         
         
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/ES6/" style="color: #00a596">
+                    ES6
+                </a>
+            </span>
+            
+        </span>
         
-        
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2026/2/3</div>
-            <a href="/2026/02/03/%E5%9B%9E%E5%86%99%E5%85%A5%E9%97%A8%E9%A2%98%E6%94%B6%E8%8E%B7/">
-                <h3>写一些题目的记录</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/%E7%AC%94%E8%AE%B0/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        笔记
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/other/" style="color: #03a9f4">
-                            other
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        <h1 id="var的问题和局限"><a href="#var的问题和局限" class="headerlink" title="var的问题和局限"></a>var的问题和局限</h1><p>在ES5及以前，Var主要有下面的问题</p>
+<ul>
+<li><p>没有块级作用域，只有函数作用域，会挂载到window</p>
+</li>
+<li><p>存在变量提升（在未声明前已被定义），var在声明前可以使用，值为<code>undefined</code></p>
+</li>
+<li><p>容易造成全局污染，全局作用域声明的变量会变成window对象的属性</p>
+</li>
+<li><p>同一个var变量可以重复声明</p>
+</li>
+</ul>
+<p>在ES6后，let和const解决了以上问题  </p>
+<h1 id="let和const的性质"><a href="#let和const的性质" class="headerlink" title="let和const的性质"></a>let和const的性质</h1><p>let和const的出现解决了var的问题</p>
+<ul>
+<li><p>它们都有块级作用域，仅在所在的代码块里发挥作用</p>
+<ul>
+<li>像<code>for</code> ,<code>while</code>,<code>try</code> ,<code>catch</code> 等用<code>{}</code> 包括起来的是块级作用域。</li>
+</ul>
+</li>
+<li><p>它们都有TDZ（暂时性死区），在声明前不可以使用，保证规范</p>
+<ul>
+<li>从进入作用域开始，到变量声明前，这段区域叫TDZ</li>
+</ul>
+</li>
+<li><p>它们其实也有变量提升，但是他们只被定义，不会被初始化，所以在声明前不可用</p>
+</li>
+<li><p>同一个let变量在同一个作用域下不可以重复声明</p>
+</li>
+<li><p>全局声明不会被挂载到window，不会作为全局对象的属性</p>
+</li>
+</ul>
+<h1 id="let和const使用和细节"><a href="#let和const使用和细节" class="headerlink" title="let和const使用和细节"></a>let和const使用和细节</h1><p>let一般拿来定义会被多次赋值的变量，const则是用来定义不被改变的常量</p>
+<ul>
+<li>let可以声明完先不初始化，const声明了必须马上初始化</li>
+<li>实际上const只能保证指向的对象的地址是不变的，不能保证对象的数据不变</li>
+</ul>
+<p>如果想要让const对象的数据不变，可以用<code>obeject.freeze()</code></p>
+<p>这里const的对象被改变了：</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">const obj = &#123;</span><br><span class="line">    <span class="type">name</span>:<span class="string">&#x27;xxx&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line">console.log(obj.name);</span><br><span class="line">obj.name = <span class="string">&#x27;zzz&#x27;</span>;</span><br><span class="line">console.log(obj.name);</span><br></pre></td></tr></table></figure>
+
+<p>这里const的对象被冻结了，不可改变：</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">const obj = <span class="keyword">Object</span>.<span class="keyword">freeze</span>(&#123;&#125;);</span><br><span class="line">// const obj = &#123;&#125;;</span><br><span class="line">obj.prop = <span class="number">123</span>; // 静默失败或TypeError(严格模式)</span><br><span class="line">console.log(obj.prop);</span><br></pre></td></tr></table></figure>
+
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/12/28</div>
-            <a href="/2025/12/28/%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E6%8E%A8/">
-                <h3>递归与递推</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/%E7%AC%94%E8%AE%B0/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        笔记
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/algo/" style="color: #ff7d73">
-                            algo
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/12/10</div>
-            <a href="/2025/12/10/%E6%A2%A6%E5%BC%80%E5%A7%8B%E7%9A%84%E5%9C%B0%E6%96%B9/">
-                <h3>梦开始的地方</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/%E7%AC%94%E8%AE%B0/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        笔记
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/Markdown/" style="color: #ffa2c4">
-                            Markdown
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
+    
+    
+    
+    
     
 </div>
 
@@ -311,6 +263,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>
