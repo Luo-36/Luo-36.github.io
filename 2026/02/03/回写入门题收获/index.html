@@ -181,7 +181,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/other/" style="color: #ff7d73">
+                <a href="/tags/other/" style="color: #00bcd4">
                     other
                 </a>
             </span>
@@ -193,7 +193,7 @@
     <div class="content" v-pre>
         <h1 id="C-库"><a href="#C-库" class="headerlink" title="C++库"></a>C++库</h1><hr>
 <h2 id="库"><a href="#库" class="headerlink" title="&lt;iomanip&gt;库"></a>&lt;iomanip&gt;库</h2><blockquote>
-<p><strong>&lt;iomanip&gt;</strong> 是 <strong>C++标准库</strong> 中的一个头文件，它提供了对输入&#x2F;输出流的格式化操作。iomanip 库中的函数允许开发者控制输出格式，如设置小数点后的位数、设置宽度、对齐方式等。iomanip 是 Input&#x2F;Output Manipulators 的缩写，它提供了一组操作符，用于控制 C++ 标准库中的输入&#x2F;输出流的格式。  </p>
+<p> &lt;iomanip&gt;  是  C++标准库  中的一个头文件，它提供了对输入&#x2F;输出流的格式化操作。iomanip 库中的函数允许开发者控制输出格式，如设置小数点后的位数、设置宽度、对齐方式等。iomanip 是 Input&#x2F;Output Manipulators 的缩写，它提供了一组操作符，用于控制 C++ 标准库中的输入&#x2F;输出流的格式。  </p>
 </blockquote>
 <p>一些示例：<br><strong>1.设置精度</strong><br>使用 setprecision 可以设置设置浮点数的有效位数。（precision 精度）</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">double</span> pi = <span class="number">3.141592653589793</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Default: &quot;</span> &lt;&lt; pi &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Set precision (3): &quot;</span> &lt;&lt; std::<span class="built_in">setprecision</span>(<span class="number">3</span>) &lt;&lt; pi &lt;&lt; <span class="string">&quot;\n&quot;</span>;  <span class="comment">//保留三位有效位</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Set precision (7): &quot;</span> &lt;&lt; std::<span class="built_in">setprecision</span>(<span class="number">7</span>) &lt;&lt; pi &lt;&lt; <span class="string">&quot;\n&quot;</span>;  <span class="comment">//保留7位有效位</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

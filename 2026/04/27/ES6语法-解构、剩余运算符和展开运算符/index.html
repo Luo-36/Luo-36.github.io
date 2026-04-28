@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>ES6语法:解构、剩余运算符和展开运算符 | Luoのblog</title>
+    <title>ES6语法:解构、剩余运算符和拓展运算符 | Luoのblog</title>
     <meta name="author" content="Luo-36" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -153,7 +153,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>ES6语法:解构、剩余运算符和展开运算符</h1>
+        <h1>ES6语法:解构、剩余运算符和拓展运算符</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -193,8 +193,9 @@
     <div class="content" v-pre>
         <h1 id="解构"><a href="#解构" class="headerlink" title="解构"></a>解构</h1><p>解构可以用来赋值，可以解构数组和对象</p>
 <h2 id="解构数组"><a href="#解构数组" class="headerlink" title="解构数组"></a>解构数组</h2><ul>
-<li>数组解构的原理是利用迭代器 <code>symbol.iterator</code> 通过下标匹配</li>
+<li>数组解构的原理是利用迭代器  symbol.iterator 通过下标匹配</li>
 <li><code>a</code> 匹配 <code>arr[0]</code> , <code>b</code> 匹配 <code>arr[1]</code></li>
+<li>解构不会改变原数据</li>
 </ul>
 <h3 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> [a,b] = arr;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a,b);</span><br></pre></td></tr></table></figure>
 <p>结果：<br><code>1 2</code></p>
@@ -206,11 +207,38 @@
 </ul>
 <h3 id="解构对象赋值"><a href="#解构对象赋值" class="headerlink" title="解构对象赋值"></a>解构对象赋值</h3><figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line">let &#123;<span class="keyword">name</span>&#125; = &#123;<span class="keyword">name</span>: Alice,age: <span class="number">18</span>&#125;;</span><br><span class="line">console.<span class="built_in">log</span>(<span class="keyword">name</span>);</span><br></pre></td></tr></table></figure>
 
-<h3 id="重命名，默认取值"><a href="#重命名，默认取值" class="headerlink" title="重命名，默认取值"></a>重命名，默认取值</h3><h1 id="待办-重命名重新看看！！"><a href="#待办-重命名重新看看！！" class="headerlink" title="待办(重命名重新看看！！)"></a>待办(重命名重新看看！！)</h1><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">//重命名</span><br><span class="line">let &#123;<span class="type">name</span>: <span class="keyword">user</span>&#125; = &#123;<span class="type">name</span>: <span class="string">&#x27;Alice&#x27;</span>,age: <span class="number">18</span>&#125;;</span><br><span class="line">console.log(<span class="keyword">user</span>);</span><br><span class="line">//默认取值</span><br><span class="line">let &#123;age: <span class="number">20</span>&#125; = &#123;<span class="type">name</span>: <span class="string">&#x27;Alice&#x27;</span>&#125;;</span><br><span class="line">console.log(age);</span><br></pre></td></tr></table></figure>
+<h3 id="重命名，默认取值"><a href="#重命名，默认取值" class="headerlink" title="重命名，默认取值"></a>重命名，默认取值</h3><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">//重命名（用冒号重命名）</span><br><span class="line">let &#123;<span class="type">name</span>: <span class="keyword">user</span>&#125; = &#123;<span class="type">name</span>: &quot;Alice&quot;&#125;;</span><br><span class="line">console.log(<span class="keyword">user</span>);</span><br><span class="line">//默认取值(用等号赋值)</span><br><span class="line">let &#123;age=<span class="number">20</span>&#125; = &#123;<span class="type">name</span>: &quot;Alice&quot;&#125;;</span><br><span class="line">console.log(age);</span><br><span class="line">//重命名+默认取值</span><br><span class="line">let &#123;<span class="type">name</span>: <span class="keyword">user</span> = &quot;Alice&quot;&#125; = &#123;age: <span class="number">18</span>&#125;;</span><br><span class="line">console.log(<span class="keyword">user</span>);</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Alice</span></span><br><span class="line"><span class="number">20</span></span><br><span class="line">Alice</span><br></pre></td></tr></table></figure>
 
+<h3 id="嵌套解构"><a href="#嵌套解构" class="headerlink" title="嵌套解构"></a>嵌套解构</h3><figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="comment">//嵌套解构</span></span><br><span class="line"><span class="symbol">let</span> &#123;<span class="meta">info</span>:&#123; id &#125;&#125; = &#123; <span class="meta">info</span>: &#123; id:<span class="string">&quot;1000&quot;</span>&#125;&#125;<span class="comment">;</span></span><br><span class="line"><span class="symbol">console.log</span>(id)<span class="comment">;</span></span><br><span class="line"><span class="comment">//嵌套+重命名+默认赋值</span></span><br><span class="line"><span class="symbol">let</span> &#123;<span class="meta">info</span>:&#123;id:<span class="meta">data</span><span class="number">=1111</span>&#125;&#125; = &#123;<span class="meta">info</span>:&#123;&#125;&#125;<span class="comment">;</span></span><br><span class="line"><span class="symbol">console.log</span>(<span class="meta">data</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 
+<p>结果：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="number">1000</span></span><br><span class="line"><span class="number">1111</span></span><br></pre></td></tr></table></figure>
 
-
+<h1 id="剩余符号-变量名"><a href="#剩余符号-变量名" class="headerlink" title="剩余符号 ...变量名"></a>剩余符号 <code>...变量名</code></h1><p>剩余符号用于收集剩余的元素</p>
+<ul>
+<li>剩余只能放在末尾</li>
+<li><code>...rem</code> &#x3D; <code>...变量名</code></li>
+<li>本质是浅拷贝</li>
+</ul>
+<h2 id="收集数组剩余部分"><a href="#收集数组剩余部分" class="headerlink" title="收集数组剩余部分"></a>收集数组剩余部分</h2><figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line"><span class="built_in">let</span> [a,...<span class="built_in">rem</span>] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">rem</span>);</span><br></pre></td></tr></table></figure>
+<p>结果：<br><code>[2,3,4,5]</code></p>
+<h2 id="收集对象剩余部分"><a href="#收集对象剩余部分" class="headerlink" title="收集对象剩余部分"></a>收集对象剩余部分</h2><figure class="highlight nix"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> &#123;...pre&#125; <span class="operator">=</span> &#123;<span class="params">name:</span> <span class="string">&quot;alice&quot;</span>,<span class="params">age:</span> <span class="number">10</span>,<span class="params">pos:</span> <span class="number">1.2</span>&#125;;</span><br><span class="line">console.log(pre);</span><br></pre></td></tr></table></figure>
+<p>结果：<br><code>{ name: &#39;alice&#39;, age: 10, pos: 1.2 }</code></p>
+<h2 id="函数接收剩余元素"><a href="#函数接收剩余元素" class="headerlink" title="函数接收剩余元素"></a>函数接收剩余元素</h2><figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line">let [a,...rem] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]<span class="comment">;</span></span><br><span class="line">let <span class="keyword">func</span> = <span class="params">(...remElem)</span> =&gt; &#123;</span><br><span class="line">    console.<span class="built_in">log</span>(remElem)<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">func</span><span class="params">(rem)</span>;</span><br></pre></td></tr></table></figure>
+<p>结果：<br><code>[ [ 2, 3, 4, 5 ] ]</code></p>
+<h1 id="拓展符号-变量名"><a href="#拓展符号-变量名" class="headerlink" title="拓展符号 ...变量名"></a>拓展符号 <code>...变量名</code></h1><p>拓展符号长得和剩余一样，不过它们不一样</p>
+<ul>
+<li>拓展是反向解构</li>
+<li>拓展是浅拷贝</li>
+</ul>
+<h2 id="一些用法"><a href="#一些用法" class="headerlink" title="一些用法"></a>一些用法</h2><h3 id="数组合并"><a href="#数组合并" class="headerlink" title="数组合并"></a>数组合并</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> newarr = [...arr,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(newarr);</span><br></pre></td></tr></table></figure>
+<p>结果：<br><code>[ 1, 2, 3, 4, 5 ]</code></p>
+<h3 id="对象合并"><a href="#对象合并" class="headerlink" title="对象合并"></a>对象合并</h3><figure class="highlight nix"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj <span class="operator">=</span> &#123;<span class="params">name:</span> <span class="string">&quot;Alice&quot;</span>,<span class="params">age:</span> <span class="number">18</span>&#125;;</span><br><span class="line"><span class="keyword">let</span> newobj <span class="operator">=</span> &#123;...obj,<span class="params">work:</span> <span class="string">&quot;doll judge&quot;</span>&#125;;</span><br><span class="line">console.log(newobj);</span><br></pre></td></tr></table></figure>
+<p>结果：<br><code>{ name: &#39;Alice&#39;, age: 18, work: &#39;doll judge&#39; }</code></p>
+<h3 id="求数组最大值"><a href="#求数组最大值" class="headerlink" title="求数组最大值"></a>求数组最大值</h3><figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line"><span class="built_in">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>];</span><br><span class="line"><span class="built_in">let</span> <span class="built_in">max</span> = Math.<span class="built_in">max</span>(...arr);</span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">max</span>);</span><br></pre></td></tr></table></figure>
+<p>结果：<br><code>5</code></p>
 
     </div>
     
