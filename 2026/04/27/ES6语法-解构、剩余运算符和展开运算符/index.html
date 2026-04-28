@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>tags | Luoのblog</title>
+    <title>ES6语法:解构、剩余运算符和展开运算符 | Luoのblog</title>
     <meta name="author" content="Luo-36" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -34,6 +34,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -147,67 +151,74 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
+            <div class="article">
+    <div>
+        <h1>ES6语法:解构、剩余运算符和展开运算符</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/27
+        </span>
         
-        
-        
-        <span>
-            <a href="/tags/skill/" style="background: #ff7d73">
+        <span class="category">
+            <a href="/categories/front-end/">
                 <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                skill
+                front-end
             </a>
         </span>
         
         
-        
-        <span>
-            <a href="/tags/ES6/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                ES6
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/ES6/" style="color: #ff7d73">
+                    ES6
+                </a>
+            </span>
+            
         </span>
-        
-        
-        
-        <span>
-            <a href="/tags/Markdown/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                Markdown
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/other/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                other
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/algo/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                algo
-            </a>
-        </span>
-        
         
     </div>
+    
+    <div class="content" v-pre>
+        <h1 id="解构"><a href="#解构" class="headerlink" title="解构"></a>解构</h1><p>解构可以用来赋值，可以解构数组和对象</p>
+<h2 id="解构数组"><a href="#解构数组" class="headerlink" title="解构数组"></a>解构数组</h2><ul>
+<li>数组解构的原理是利用迭代器 <code>symbol.iterator</code> 通过下标匹配</li>
+<li><code>a</code> 匹配 <code>arr[0]</code> , <code>b</code> 匹配 <code>arr[1]</code></li>
+</ul>
+<h3 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> [a,b] = arr;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a,b);</span><br></pre></td></tr></table></figure>
+<p>结果：<br><code>1 2</code></p>
+<h3 id="默认赋值-按需取值，跳过项"><a href="#默认赋值-按需取值，跳过项" class="headerlink" title="默认赋值,按需取值，跳过项"></a>默认赋值,按需取值，跳过项</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//这里的arr的第二个元素未赋值，定义为undefined</span></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="comment">//跳过第一个元素，a默认设为2</span></span><br><span class="line"><span class="keyword">let</span> [,a=<span class="number">2</span>,b] = arr;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a,b);</span><br></pre></td></tr></table></figure>
+<p>结果：<br><code>2 1</code></p>
+<h2 id="解构对象"><a href="#解构对象" class="headerlink" title="解构对象"></a>解构对象</h2><ul>
+<li>解构对象原理是按键值来匹配的，没有迭代器</li>
+<li>因此对象的解构需要层级相对应</li>
+</ul>
+<h3 id="解构对象赋值"><a href="#解构对象赋值" class="headerlink" title="解构对象赋值"></a>解构对象赋值</h3><figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line">let &#123;<span class="keyword">name</span>&#125; = &#123;<span class="keyword">name</span>: Alice,age: <span class="number">18</span>&#125;;</span><br><span class="line">console.<span class="built_in">log</span>(<span class="keyword">name</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="重命名，默认取值"><a href="#重命名，默认取值" class="headerlink" title="重命名，默认取值"></a>重命名，默认取值</h3><h1 id="待办-重命名重新看看！！"><a href="#待办-重命名重新看看！！" class="headerlink" title="待办(重命名重新看看！！)"></a>待办(重命名重新看看！！)</h1><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">//重命名</span><br><span class="line">let &#123;<span class="type">name</span>: <span class="keyword">user</span>&#125; = &#123;<span class="type">name</span>: <span class="string">&#x27;Alice&#x27;</span>,age: <span class="number">18</span>&#125;;</span><br><span class="line">console.log(<span class="keyword">user</span>);</span><br><span class="line">//默认取值</span><br><span class="line">let &#123;age: <span class="number">20</span>&#125; = &#123;<span class="type">name</span>: <span class="string">&#x27;Alice&#x27;</span>&#125;;</span><br><span class="line">console.log(age);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+    </div>
+    
+    
+    
+    
+    
+    
     
 </div>
 
@@ -239,6 +250,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>

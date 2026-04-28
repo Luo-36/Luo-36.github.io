@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>tags | Luoのblog</title>
+    <title>Luoのblog</title>
     <meta name="author" content="Luo-36" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -38,6 +38,8 @@
 
 
 
+
+<script src="/js/lib/home.js"></script>
 
 <link rel="stylesheet" href="/css/main.css" />
 
@@ -147,66 +149,136 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
+            <div id="home-head">
+    <div
+        id="home-background"
+        ref="homeBackground"
+        data-images="/images/background.jpg"
+    ></div>
+    <div id="home-info" @click="homeClick">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>Luoのblog</h1>
+                <h3></h3>
+                <h5></h5>
+            </div>
+        </span>
+    </div>
+</div>
+<div
+    id="home-posts-wrap"
+    ref="homePostsWrap"
+    true
+>
+    <div id="home-posts">
+        
+
+<div class="post">
+    <a href="/2025/12/10/%E6%A2%A6%E5%BC%80%E5%A7%8B%E7%9A%84%E5%9C%B0%E6%96%B9/">
+        <h2 class="post-title">梦开始的地方</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%AC%94%E8%AE%B0/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                笔记
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/12/10
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <!-- 最后强制截断全文（取前200字符，避免显示全文） -->
+            <h1 id="第一次写blog，先来试试Markdown吧！"><a href="#第一次写blog，先来试试Markdown吧！" class="headerlink" title="第一次写blog，先来试试Markdown吧！"></a>第一次写blog，先来试试Markdown吧！</h1><hr>
+<p>Tip： </p>
+<ul>
+<li>要注意符号后留“空格”，这个是基本的语法。<...
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Markdown/" style="color: #ffa2c4">Markdown</a>
+        </span>
+        
+    </div>
+    <!-- 保留“阅读全文”按钮 -->
+    <a href="/2025/12/10/%E6%A2%A6%E5%BC%80%E5%A7%8B%E7%9A%84%E5%9C%B0%E6%96%B9/" class="go-post">阅读全文</a>
+</div>
+
+        <div class="page-current">
     
-    <div class="categories-tags">
+    <a class="page-num" href="/">
+        <i class="fa-solid fa-caret-left fa-fw"></i>
+    </a>
+    <a class="page-num" href="/">1</a>
+    <span class="page-omit">...</span>
+    
+    <span class="current">2</span>
+    
+    
+    
+    
+</div>
+
+    </div>
+    
+    <div id="home-card">
+        <div id="card-style">
+    <div id="card-div">
+        <div class="avatar">
+            <img src="/images/avatar.jpg" alt="avatar" />
+        </div>
+        <div class="name">Luo-36</div>
+        <div class="description">
+            <p>一只小白</p>
+
+        </div>
         
         
+        <div class="friend-links">
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://github.com/Luo-36">github</a>
+            </div>
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://blog.u2686324.nyat.app:19171/">My other blog</a>
+            </div>
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://argvchs.github.io/">argvchs</a>
+            </div>
+            
+        </div>
         
-        <span>
-            <a href="/tags/skill/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                skill
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/ES6/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                ES6
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/Markdown/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                Markdown
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/other/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                other
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/algo/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                algo
-            </a>
-        </span>
-        
-        
+    </div>
+</div>
+
     </div>
     
 </div>
