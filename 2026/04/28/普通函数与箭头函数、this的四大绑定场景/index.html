@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>普通函数与箭头函数、this的四大绑定场景 | Luoのblog</title>
+    <meta name="author" content="Luo-36" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING...</h2>
+                    <!-- <p>加载过慢请开启缓存 浏览器默认开启</p> -->
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>LUOのBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;LUOのBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>普通函数与箭头函数、this的四大绑定场景</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/28
+        </span>
+        
+        <span class="category">
+            <a href="/categories/front-end/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                front-end
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/ES6/" style="color: #00a596">
+                    ES6
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>写在前面：ES6默认开启严格模式</p>
+<h1 id="普通函数与箭头函数的区别"><a href="#普通函数与箭头函数的区别" class="headerlink" title="普通函数与箭头函数的区别"></a>普通函数与箭头函数的区别</h1><ul>
+<li>普通函数遵循this的四种绑定原则</li>
+<li>箭头函数的this是静态绑定的，固定绑定于箭头函数定义的外层作用域</li>
+</ul>
+<h1 id="this-的四种绑定规则"><a href="#this-的四种绑定规则" class="headerlink" title="this 的四种绑定规则"></a>this 的四种绑定规则</h1><h2 id="优先级：-new-显式-隐式-默认"><a href="#优先级：-new-显式-隐式-默认" class="headerlink" title="优先级： new &gt; 显式 &gt; 隐式 &gt; 默认"></a>优先级： new &gt; 显式 &gt; 隐式 &gt; 默认</h2><ul>
+<li>默认绑定（在最外层）</li>
+</ul>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">function <span class="built_in">fn</span>() &#123;</span><br><span class="line">    conosole<span class="selector-class">.log</span>(this);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">fn</span>();</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<ol>
+<li>在 严格模式 下：<code>undefined</code></li>
+<li>在 模非严格式 下： <code>window</code></li>
+</ol>
+<ul>
+<li>隐式绑定（谁调用就绑定谁）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;alice&#x27;</span>,</span><br><span class="line">    <span class="attr">normalFn</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="title function_">normalFn</span>();</span><br></pre></td></tr></table></figure>
+<p>结果：<br><code>alice</code></p>
+<ul>
+<li>显式绑定<ul>
+<li>call()：立刻执行，逐个传参<ul>
+<li>语法：函数.call(要绑定的的this,参数1,参数2,参数3…)</li>
+</ul>
+</li>
+<li>apply()：立刻执行，传参数数组<ul>
+<li>语法：函数.apply(要绑定的的this,[参数1,参数2,参数3…])</li>
+<li>这个数组会展开成单个参数传递给函数</li>
+</ul>
+</li>
+<li>bind()：返回新函数，不立刻执行，参数分批传。调用新函数才会执行。<ul>
+<li>参数1：this要绑定的对象</li>
+<li>参数2：参数列表（函数需要几个参数就写几个，按顺序传入）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//call();</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sayHi</span>(<span class="params">greeting</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;greeting&#125;</span>,我是<span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = &#123;<span class="attr">name</span>: <span class="string">&#x27;alice&#x27;</span>&#125;;</span><br><span class="line">sayHi.<span class="title function_">call</span>(proson,<span class="string">&#x27;Hi&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>结果：<br><code>Hi,我是alice</code></p>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line">//<span class="built_in">apply</span>();</span><br><span class="line">function <span class="built_in">sum</span>(a,b,c) &#123;</span><br><span class="line">    console.<span class="built_in">log</span>(this.<span class="built_in">title</span>,a+b+c);</span><br><span class="line">&#125;</span><br><span class="line">const <span class="built_in">title</span> = &#123;<span class="built_in">title</span>:&#x27;<span class="built_in">sum</span>:&#x27;&#125;;</span><br><span class="line"><span class="built_in">sum</span>.<span class="built_in">apply</span>(<span class="built_in">title</span>,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]);</span><br></pre></td></tr></table></figure>
+<p>结果是：<br><code>sum: 6</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//bind();</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Hi</span>(<span class="params">a,b</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;a&#125;</span>,<span class="subst">$&#123;b&#125;</span>,<span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>,hey!`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = &#123;<span class="attr">name</span>: <span class="string">&#x27;alice&#x27;</span>&#125;;</span><br><span class="line"><span class="keyword">let</span> <span class="title class_">HiAlice</span> = <span class="title class_">Hi</span>.<span class="title function_">bind</span>(person,<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line"><span class="title class_">HiAlice</span>();</span><br></pre></td></tr></table></figure>
+<p>结果是：<br><code>1,2,alice,hey!</code></p>
+<ul>
+<li>new绑定(绑定创建的实例)</li>
+</ul>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> Person(<span class="type">name</span>) &#123;</span><br><span class="line">    this.name = <span class="type">name</span>;</span><br><span class="line">&#125;</span><br><span class="line">const alice = <span class="built_in">new</span> Person(<span class="string">&#x27;Alice&#x27;</span>);</span><br><span class="line">console.log(alice.name);    </span><br></pre></td></tr></table></figure>
+<p>结果：<br><code>Alice</code></p>
+<h1 id="node环境和浏览器"><a href="#node环境和浏览器" class="headerlink" title="node环境和浏览器"></a>node环境和浏览器</h1><ul>
+<li>浏览器的最顶层是 <code>window</code></li>
+<li>node ESM的最顶层是 <code>undefined</code></li>
+<li>在测试普通函数和箭头函数的this时要注意一下</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>对象方法（对象里的函数）推荐用普通函数写法</li>
+<li>箭头函数推荐写在普通函数里</li>
+<li>当普通函数里有多层箭头函数时，只看最外层普通函数的this</li>
+<li>箭头函数永远只找外层最近的普通函数的 this</li>
+<li>一些特殊的函数是挂载到顶部的，比如定时器函数 setInterval()等</li>
+<li>对于回调函数也应该注意一下两者的this绑定</li>
+</ul>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2025 - 2026 Luoのblog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Luo-36
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
