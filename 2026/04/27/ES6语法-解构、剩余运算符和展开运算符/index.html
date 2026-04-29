@@ -181,7 +181,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/ES6/" style="color: #00bcd4">
+                <a href="/tags/ES6/" style="color: #03a9f4">
                     ES6
                 </a>
             </span>
@@ -191,7 +191,8 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="解构"><a href="#解构" class="headerlink" title="解构"></a>解构</h1><p>解构可以用来赋值，可以解构数组和对象</p>
+        <hr>
+<h1 id="解构"><a href="#解构" class="headerlink" title="解构"></a>解构</h1><p>解构可以用来赋值，可以解构数组和对象</p>
 <h2 id="解构数组"><a href="#解构数组" class="headerlink" title="解构数组"></a>解构数组</h2><ul>
 <li>数组解构的原理是利用迭代器  symbol.iterator 通过下标匹配</li>
 <li><code>a</code> 匹配 <code>arr[0]</code> , <code>b</code> 匹配 <code>arr[1]</code></li>
@@ -216,6 +217,7 @@
 <p>结果：</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="number">1000</span></span><br><span class="line"><span class="number">1111</span></span><br></pre></td></tr></table></figure>
 
+<hr>
 <h1 id="剩余符号-变量名"><a href="#剩余符号-变量名" class="headerlink" title="剩余符号 ...变量名"></a>剩余符号 <code>...变量名</code></h1><p>剩余符号用于收集剩余的元素</p>
 <ul>
 <li>剩余只能放在末尾</li>
@@ -228,6 +230,7 @@
 <p>结果：<br><code>{ name: &#39;alice&#39;, age: 10, pos: 1.2 }</code></p>
 <h2 id="函数接收剩余元素"><a href="#函数接收剩余元素" class="headerlink" title="函数接收剩余元素"></a>函数接收剩余元素</h2><figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line">let [a,...rem] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]<span class="comment">;</span></span><br><span class="line">let <span class="keyword">func</span> = <span class="params">(...remElem)</span> =&gt; &#123;</span><br><span class="line">    console.<span class="built_in">log</span>(remElem)<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">func</span><span class="params">(rem)</span>;</span><br></pre></td></tr></table></figure>
 <p>结果：<br><code>[ [ 2, 3, 4, 5 ] ]</code></p>
+<hr>
 <h1 id="拓展符号-变量名"><a href="#拓展符号-变量名" class="headerlink" title="拓展符号 ...变量名"></a>拓展符号 <code>...变量名</code></h1><p>拓展符号长得和剩余一样，不过它们不一样</p>
 <ul>
 <li>拓展是反向解构</li>

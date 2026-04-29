@@ -181,7 +181,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/ES6/" style="color: #00a596">
+                <a href="/tags/ES6/" style="color: #03a9f4">
                     ES6
                 </a>
             </span>
@@ -192,11 +192,13 @@
     
     <div class="content" v-pre>
         <p>写在前面：ES6默认开启严格模式</p>
+<hr>
 <h1 id="普通函数与箭头函数的区别"><a href="#普通函数与箭头函数的区别" class="headerlink" title="普通函数与箭头函数的区别"></a>普通函数与箭头函数的区别</h1><ul>
 <li>普通函数遵循this的四种绑定原则</li>
 <li>箭头函数的this是静态绑定的，固定绑定于箭头函数定义的外层作用域</li>
 </ul>
-<h1 id="this-的四种绑定规则"><a href="#this-的四种绑定规则" class="headerlink" title="this 的四种绑定规则"></a>this 的四种绑定规则</h1><h2 id="优先级：-new-显式-隐式-默认"><a href="#优先级：-new-显式-隐式-默认" class="headerlink" title="优先级： new &gt; 显式 &gt; 隐式 &gt; 默认"></a>优先级： new &gt; 显式 &gt; 隐式 &gt; 默认</h2><ul>
+<hr>
+<h1 id="this-的四种绑定规则"><a href="#this-的四种绑定规则" class="headerlink" title="this 的四种绑定规则"></a>this 的四种绑定规则</h1><h3 id="优先级：-new-显式-隐式-默认"><a href="#优先级：-new-显式-隐式-默认" class="headerlink" title="优先级： new &gt; 显式 &gt; 隐式 &gt; 默认"></a>优先级： new &gt; 显式 &gt; 隐式 &gt; 默认</h3><ul>
 <li>默认绑定（在最外层）</li>
 </ul>
 <figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">function <span class="built_in">fn</span>() &#123;</span><br><span class="line">    conosole<span class="selector-class">.log</span>(this);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">fn</span>();</span><br></pre></td></tr></table></figure>
@@ -240,11 +242,13 @@
 </ul>
 <figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> Person(<span class="type">name</span>) &#123;</span><br><span class="line">    this.name = <span class="type">name</span>;</span><br><span class="line">&#125;</span><br><span class="line">const alice = <span class="built_in">new</span> Person(<span class="string">&#x27;Alice&#x27;</span>);</span><br><span class="line">console.log(alice.name);    </span><br></pre></td></tr></table></figure>
 <p>结果：<br><code>Alice</code></p>
+<hr>
 <h1 id="node环境和浏览器"><a href="#node环境和浏览器" class="headerlink" title="node环境和浏览器"></a>node环境和浏览器</h1><ul>
 <li>浏览器的最顶层是 <code>window</code></li>
 <li>node ESM的最顶层是 <code>undefined</code></li>
 <li>在测试普通函数和箭头函数的this时要注意一下</li>
 </ul>
+<hr>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
 <li>对象方法（对象里的函数）推荐用普通函数写法</li>
 <li>箭头函数推荐写在普通函数里</li>

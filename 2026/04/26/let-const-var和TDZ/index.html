@@ -181,7 +181,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/ES6/" style="color: #ff7d73">
+                <a href="/tags/ES6/" style="color: #03a9f4">
                     ES6
                 </a>
             </span>
@@ -191,7 +191,8 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="var的问题和局限"><a href="#var的问题和局限" class="headerlink" title="var的问题和局限"></a>var的问题和局限</h1><p>在ES5及以前，Var主要有下面的问题</p>
+        <hr>
+<h1 id="var的问题和局限"><a href="#var的问题和局限" class="headerlink" title="var的问题和局限"></a>var的问题和局限</h1><p>在ES5及以前，Var主要有下面的问题</p>
 <ul>
 <li><p>没有块级作用域，只有函数作用域，会挂载到window</p>
 </li>
@@ -203,6 +204,7 @@
 </li>
 </ul>
 <p>在ES6后，let和const解决了以上问题  </p>
+<hr>
 <h1 id="let和const的性质"><a href="#let和const的性质" class="headerlink" title="let和const的性质"></a>let和const的性质</h1><p>let和const的出现解决了var的问题</p>
 <ul>
 <li><p>它们都有块级作用域，仅在所在的代码块里发挥作用</p>
@@ -222,6 +224,7 @@
 <li><p>全局声明不会被挂载到window，不会作为全局对象的属性</p>
 </li>
 </ul>
+<hr>
 <h1 id="let和const使用和细节"><a href="#let和const使用和细节" class="headerlink" title="let和const使用和细节"></a>let和const使用和细节</h1><p>let一般拿来定义会被多次赋值的变量，const则是用来定义不被改变的常量</p>
 <ul>
 <li>let可以声明完先不初始化，const声明了必须马上初始化</li>
@@ -233,7 +236,6 @@
 
 <p>这里const的对象被冻结了，不可改变：</p>
 <figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">const obj = <span class="keyword">Object</span>.<span class="keyword">freeze</span>(&#123;&#125;);</span><br><span class="line">// const obj = &#123;&#125;;</span><br><span class="line">obj.prop = <span class="number">123</span>; // 静默失败或TypeError(严格模式)</span><br><span class="line">console.log(obj.prop);</span><br></pre></td></tr></table></figure>
-
     </div>
     
     

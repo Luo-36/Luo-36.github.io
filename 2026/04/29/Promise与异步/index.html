@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>Promise与异步 | Luoのblog</title>
+    <meta name="author" content="Luo-36" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING...</h2>
+                    <!-- <p>加载过慢请开启缓存 浏览器默认开启</p> -->
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>LUOのBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;LUOのBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>Promise与异步</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/29
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/ES6/" style="color: #03a9f4">
+                    ES6
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <hr>
+<h1 id="异步与同步"><a href="#异步与同步" class="headerlink" title="异步与同步"></a>异步与同步</h1><ul>
+<li>同步是任务按照顺序执行，一个任务完成后再执行下一个，具有阻塞性</li>
+<li>异步与同步相对，异步支持在等待一个任务完成时先去执行其他任务</li>
+<li>异步可以提高程序的效率和响应性，但是需要处理好并发和状态管理</li>
+<li>异步会等同步执行结束再执行</li>
+</ul>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line"><span class="comment">//异步会等同步执行结束再执行</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;ok&quot;</span>);</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;ok&quot;</span>);</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;ok&quot;</span>);</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;ok&quot;</span>);</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;aync!&quot;</span>);</span><br><span class="line">&#125;,<span class="number">1</span>);</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;ok&quot;</span>);</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;ok&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>异步操作通常需要回调函数，多层回调函数嵌套就有可能形成 “回调地狱”。</p>
+<p>例如以下写法: </p>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;任务1，ok！&quot;</span>);</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;任务2，ok！&quot;</span>);</span><br><span class="line">    <span class="comment">//setTimeout(函数fn,时间（毫秒）);</span></span><br><span class="line">    <span class="comment">//时间（ms）后执行 函数fn</span></span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;任务3，ok！&quot;</span>);</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;任务4，ok！&quot;</span>);</span><br><span class="line">            setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;任务5，ok！&quot;</span>);</span><br><span class="line">                <span class="comment">//....</span></span><br><span class="line">            &#125; ,<span class="number">1000</span>);</span><br><span class="line">        &#125;,<span class="number">1000</span>);</span><br><span class="line">    &#125;,<span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样嵌套很多层，会使逻辑过分复杂，因此Promise应运而生。</p>
+<hr>
+<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><p>Promise是需要传入两个回调函数的对象：</p>
+<ul>
+<li>resolve()     &#x2F;&#x2F;成功时执行</li>
+<li>rejected()    &#x2F;&#x2F;失败时执行</li>
+<li>括号里可以参入参数（传入函数也可以）</li>
+</ul>
+<p>可以理解为给出一个承诺，实现了有实现的处理方法，失败了也有对应的处理方法。</p>
+<p>执行后会返回一个新的promise对象。</p>
+<h2 id="Promise的三种状态"><a href="#Promise的三种状态" class="headerlink" title="Promise的三种状态"></a>Promise的三种状态</h2><ul>
+<li>pending（等待）</li>
+<li>fulfilled （成功）</li>
+<li>rejected（失败）</li>
+</ul>
+<p>初始时， Promise 是 pending ，成功后执行 resolve ，状态锁定为 fulfilled 。<br>失败时执行 rejected ，状态锁定为 rejected ，两者互斥。</p>
+<p>让我们来试试吧：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义了Promise对象，不进行处理</span></span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="title class_">Promise</span> (<span class="function">(<span class="params">resolve,rejected</span>) =&gt;</span> &#123; &#125;); </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p1);  <span class="comment">//此时状态：pending</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//定义了Promise对象，成功处理</span></span><br><span class="line"><span class="keyword">let</span> p2 = <span class="keyword">new</span> <span class="title class_">Promise</span> (<span class="function">(<span class="params">resolve,rejected</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">resolve</span>(<span class="string">&quot;任务1成功&quot;</span>);  <span class="comment">//假定成功</span></span><br><span class="line">    <span class="comment">//这里成功了就不会返回失败的信息</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p2);  <span class="comment">//此时状态：fulfilled</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">//定义了Promise对象，处理失败</span></span><br><span class="line"><span class="keyword">let</span> p3 = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, rejected</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">rejected</span>(<span class="string">&quot;任务1失败&quot;</span>);  <span class="comment">//假定失败</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p3);    <span class="comment">//此时状态：rejected</span></span><br></pre></td></tr></table></figure>
+
+<p>此时在浏览器控制台可以看到输出的 Promise 的不同状态。<br>细心的你发现了，最后一行报错了！<br>其实那是因为我们没有用一个.catch()接住错误！</p>
+<h2 id="Promise之后的三种处理方法"><a href="#Promise之后的三种处理方法" class="headerlink" title="Promise之后的三种处理方法"></a>Promise之后的三种处理方法</h2><ul>
+<li>.then() 成功之后的处理方法</li>
+<li>.catch() 失败之后的处理方法</li>
+<li>.finally() 无论成功还是失败，都会执行的方法</li>
+</ul>
+<p>切记，这几个方法都是一个对象下的，习惯加分号的注意不要隔开了，不然要重新指定以下对象。<br>后面讲到链式调用就好理解了。</p>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">let p = <span class="keyword">new</span> Promise(<span class="function">(<span class="params">resolve, rejected</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//下面这两句可以分别单独注释掉看看效果</span></span><br><span class="line">    resolve(<span class="string">&quot;Success!&quot;</span>);</span><br><span class="line">    rejected(<span class="string">&quot;Fail!&quot;</span>);</span><br><span class="line">&#125;); </span><br><span class="line">p</span><br><span class="line">.then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//对接收的参数进行成功处理</span></span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(data);</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="keyword">catch</span>(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//接住报错，对接收的参数进行失败处理</span></span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(err);</span><br><span class="line">&#125;)</span><br><span class="line">.finally(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//进行最后的处理</span></span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;All Clear!&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>结构一般就是: <code>p.then() .catch() .finally()</code></p>
+<h2 id="链式调用"><a href="#链式调用" class="headerlink" title="链式调用"></a>链式调用</h2><p>到这里你可能会好奇，这怎么解决 “回调地狱” 问题呢？<br>前文提到了，在成功解决后会返回一个新的Promise对象。</p>
+<p>看看下面的代码：</p>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">let p1 = <span class="keyword">new</span> Promise(<span class="function">(<span class="params">resolve,reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;Start&quot;</span>); </span><br><span class="line">    resolve(<span class="string">&quot;mission one success&quot;</span>);</span><br><span class="line">    <span class="comment">// reject(&quot;mission one fail&quot;);</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  p1</span><br><span class="line">  .then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;   <span class="comment">//任务1的正确处理</span></span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(data);</span><br><span class="line">    <span class="comment">//返回一个新的 Promise 对象来实现嵌套。</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Promise(<span class="function">(<span class="params">resolve,reject</span>) =&gt;</span>&#123;</span><br><span class="line">      resolve(<span class="string">&quot;mission two success&quot;</span>);</span><br><span class="line">      <span class="comment">// reject(&quot;mission two fail&quot;);</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;   <span class="comment">//任务2的正确处理</span></span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(data);</span><br><span class="line">    <span class="comment">//同理</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Promise(<span class="function">(<span class="params">resolve,reject</span>) =&gt;</span>&#123;</span><br><span class="line">      resolve(<span class="string">&quot;mission three success&quot;</span>)</span><br><span class="line">      <span class="comment">// reject(&quot;mission three fail&quot;);</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;   <span class="comment">//任务3的正确处理</span></span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(data);</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">//这个是统一的错误处理，只有有一个环节出错后面就不会执行，直接执行错误处理</span></span><br><span class="line">  .<span class="keyword">catch</span>(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(err);</span><br><span class="line">  &#125;)</span><br><span class="line">  .finally(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;mission completed&quot;</span>);  </span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>注意到了吗？我们现在写的结构是： <code>p.then().then().then().catch().finally()</code>。<br>这样就可以把回调嵌套用 “链式” 的方式来写！更方便理清每一层的逻辑。</p>
+<p>如果想要给每个环节都加一个错误处理那就使用多个.catch()就好了。<br>如果想要出错之后继续进行后面的那就在.catch里返回一个 “成功状态” 的Promise对象就好了。</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2025 - 2026 Luoのblog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Luo-36
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
