@@ -177,6 +177,7 @@
     <div id="home-posts">
         
 
+
 <div class="post">
     <a href="/2026/04/30/Promise%E6%8B%93%E5%B1%95/">
         <h2 class="post-title">Promise拓展</h2>
@@ -204,10 +205,10 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <!-- 最后强制截断全文（取前200字符，避免显示全文） -->
-            <h1 id="Promise拓展"><a href="#Promise拓展" class="headerlink" title="Promise拓展"></a>Promise拓展</h1><p>这次介绍一些Promise的拓展方法。</p>
-<hr>
-<h2 id="Promise-reject-和Promise-resolve"><a href="#Promise-reject-和Promis...
+            Promise拓展这次介绍一些Promise的拓展方法。
+
+Promise.reject()和Promise.resolve()Promise.reject() 方法会返回一个一个 “已拒绝”（rejected）的 Promise 对象，参数为 拒绝原因 。
+let p = Promise.reject(&quot;Mission one fail&quot;);p.catch( err =...
             
         </div>
     </div>
@@ -221,7 +222,7 @@
         
         <span class="tag">
             
-            <a href="/tags/ES6/" style="color: #ff7d73">ES6</a>
+            <a href="/tags/ES6/" style="color: #00a596">ES6</a>
         </span>
         
     </div>
@@ -255,12 +256,14 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <!-- 最后强制截断全文（取前200字符，避免显示全文） -->
-            <hr>
-<h1 id="异步与同步"><a href="#异步与同步" class="headerlink" title="异步与同步"></a>异步与同步</h1><ul>
-<li>同步是任务按照顺序执行，一个任务完成后再执行下一个，具有阻塞性</li>
-<li>异步与同步相对，异步支持在等待一个任务完成时先去执行其他任务</li>
-<li>异步可以提高程序的效率和响应性，但是需要处理好并发和...
+            
+异步与同步
+同步是任务按照顺序执行，一个任务完成后再执行下一个，具有阻塞性
+异步与同步相对，异步支持在等待一个任务完成时先去执行其他任务
+异步可以提高程序的效率和响应性，但是需要处理好并发和状态管理
+异步会等同步执行结束再执行
+
+//异步会等同步执行结束再执行console.log(&quot;ok&quot;);console.log(&quot;ok&quot;);console.lo...
             
         </div>
     </div>
@@ -274,7 +277,7 @@
         
         <span class="tag">
             
-            <a href="/tags/ES6/" style="color: #ff7d73">ES6</a>
+            <a href="/tags/ES6/" style="color: #03a9f4">ES6</a>
         </span>
         
     </div>
@@ -282,7 +285,7 @@
 </div>
 
 <div class="post">
-    <a href="/2026/04/28/%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E3%80%81this%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%BB%91%E5%AE%9A%E5%9C%BA%E6%99%AF/">
+    <a href="/2026/04/28/%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0this%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%BB%91%E5%AE%9A%E5%9C%BA%E6%99%AF/">
         <h2 class="post-title">普通函数与箭头函数、this的四大绑定场景</h2>
     </a>
     <div class="category-and-date">
@@ -308,12 +311,18 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <!-- 最后强制截断全文（取前200字符，避免显示全文） -->
-            <p>写在前面：ES6默认开启严格模式</p>
-<hr>
-<h1 id="普通函数与箭头函数的区别"><a href="#普通函数与箭头函数的区别" class="headerlink" title="普通函数与箭头函数的区别"></a>普通函数与箭头函数的区别</h1><ul>
-<li>普通函数遵循this的四种绑定原则</li>
-<li>箭头函数的this是静态绑定的，固定绑定于箭头函数定义的...
+            写在前面：ES6默认开启严格模式
+
+普通函数与箭头函数的区别
+普通函数遵循this的四种绑定原则
+箭头函数的this是静态绑定的，固定绑定于箭头函数定义的外层作用域
+
+
+this 的四种绑定规则优先级： new &gt; 显式 &gt; 隐式 &gt; 默认
+默认绑定（在最外层）
+
+function fn() &#123;    conosole.log(this);&#125;fn();
+...
             
         </div>
     </div>
@@ -327,15 +336,15 @@
         
         <span class="tag">
             
-            <a href="/tags/ES6/" style="color: #00a596">ES6</a>
+            <a href="/tags/ES6/" style="color: #ff7d73">ES6</a>
         </span>
         
     </div>
-    <a href="/2026/04/28/%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E3%80%81this%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%BB%91%E5%AE%9A%E5%9C%BA%E6%99%AF/" class="go-post">阅读全文</a>
+    <a href="/2026/04/28/%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0this%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%BB%91%E5%AE%9A%E5%9C%BA%E6%99%AF/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
-    <a href="/2026/04/27/ES6%E8%AF%AD%E6%B3%95-%E8%A7%A3%E6%9E%84%E3%80%81%E5%89%A9%E4%BD%99%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E5%B1%95%E5%BC%80%E8%BF%90%E7%AE%97%E7%AC%A6/">
+    <a href="/2026/04/27/ES6%E8%AF%AD%E6%B3%95%E8%A7%A3%E6%9E%84%E5%89%A9%E4%BD%99%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E5%B1%95%E5%BC%80%E8%BF%90%E7%AE%97%E7%AC%A6/">
         <h2 class="post-title">ES6语法:解构、剩余运算符和拓展运算符</h2>
     </a>
     <div class="category-and-date">
@@ -361,11 +370,16 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <!-- 最后强制截断全文（取前200字符，避免显示全文） -->
-            <hr>
-<h1 id="解构"><a href="#解构" class="headerlink" title="解构"></a>解构</h1><p>解构可以用来赋值，可以解构数组和对象</p>
-<h2 id="解构数组"><a href="#解构数组" class="headerlink" title="解构数组"></a>解构数组</h2><ul>
-<li>数组解构的原理是利用迭代器  sym...
+            
+解构解构可以用来赋值，可以解构数组和对象
+解构数组
+数组解构的原理是利用迭代器  symbol.iterator 通过下标匹配
+a 匹配 arr[0] , b 匹配 arr[1]
+解构不会改变原数据
+
+解构赋值let arr = [1,2,3,4];let [a,b] = arr;console.log(a,b);
+结果：1 2
+默认赋值,按需取值，跳过项//这里的arr的第二个元素未赋值...
             
         </div>
     </div>
@@ -383,7 +397,7 @@
         </span>
         
     </div>
-    <a href="/2026/04/27/ES6%E8%AF%AD%E6%B3%95-%E8%A7%A3%E6%9E%84%E3%80%81%E5%89%A9%E4%BD%99%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E5%B1%95%E5%BC%80%E8%BF%90%E7%AE%97%E7%AC%A6/" class="go-post">阅读全文</a>
+    <a href="/2026/04/27/ES6%E8%AF%AD%E6%B3%95%E8%A7%A3%E6%9E%84%E5%89%A9%E4%BD%99%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E5%B1%95%E5%BC%80%E8%BF%90%E7%AE%97%E7%AC%A6/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -413,13 +427,21 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <!-- 最后强制截断全文（取前200字符，避免显示全文） -->
-            <hr>
-<h1 id="var的问题和局限"><a href="#var的问题和局限" class="headerlink" title="var的问题和局限"></a>var的问题和局限</h1><p>在ES5及以前，Var主要有下面的问题</p>
-<ul>
-<li><p>没有块级作用域，只有函数作用域，会挂载到window</p>
-</li>
-<li><p>存在变量提升（在未声明前已被定义）...
+            
+var的问题和局限在ES5及以前，Var主要有下面的问题
+
+没有块级作用域，只有函数作用域，会挂载到window
+
+存在变量提升（在未声明前已被定义），var在声明前可以使用，值为undefined
+
+容易造成全局污染，全局作用域声明的变量会变成window对象的属性
+
+同一个var变量可以重复声明
+
+
+在ES6后，let和const解决了以上问题  
+
+let和const的性质let和c...
             
         </div>
     </div>
@@ -433,7 +455,7 @@
         
         <span class="tag">
             
-            <a href="/tags/ES6/" style="color: #00a596">ES6</a>
+            <a href="/tags/ES6/" style="color: #ffa2c4">ES6</a>
         </span>
         
     </div>
