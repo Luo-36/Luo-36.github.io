@@ -175,81 +175,270 @@
     true
 >
     <div id="home-posts">
-        <%
-    let posts = site.posts,
-        current = (page.current - 1) * config.index_generator.per_page;
-    posts.data.sort((a, b) => {
-        let x = a.pinned ?? 0,
-            y = b.pinned ?? 0;
-        return x === y ? b.date - a.date : y - x;
-    });
-    posts = posts.slice(current, config.index_generator.per_page + current);
-%>
-<% posts.forEach((post) => { %>
+        
+
 <div class="post">
-    <a href="<%- url_for(post.path) %>">
-        <h2 class="post-title"><%= post.title %></h2>
+    <a href="/2026/04/30/Promise%E6%8B%93%E5%B1%95%E5%92%8C%E4%B8%80%E4%BA%9B%E5%BA%94%E7%94%A8/">
+        <h2 class="post-title">Promise拓展</h2>
     </a>
     <div class="category-and-date">
-        <% if (post.categories.data.length !== 0) { %>
+        
         <span class="category">
-            <a href="<%- url_for(post.categories.data[0].path) %>">
+            <a href="/categories/front-end/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                <%= post.categories.data[0].name %>
+                front-end
             </a>
         </span>
-        <% } %>
+        
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            <%- date(post.date, "YYYY/M/D") %>
+            2026/4/30
         </span>
-        <% if (theme.crypto.enable && typeof post.secret !== "undefined") { %>
-        <span class="special">
-            <i class="fa-solid fa-lock fa-fw"></i>
-        </span>
-        <% } %>
-        <% if (typeof post.pinned !== "undefined") { %>
-        <span class="special">
-            <i class="fa-solid fa-grip-vertical fa-fw"></i>
-        </span>
-        <% } %>
+        
+        
     </div>
     <div class="description">
         <div class="content" v-pre>
-            <% if (typeof post.description !== "undefined") { %>
-            <%- markdown(post.description) %>
-            <% } else if (post.excerpt) { %>
-            <%- post.excerpt %>
-            <% } else { %>
-            <%- post.content %>
-            <% } %>
+            
+            <!-- 最后强制截断全文（取前200字符，避免显示全文） -->
+            <h1 id="Promise拓展"><a href="#Promise拓展" class="headerlink" title="Promise拓展"></a>Promise拓展</h1><p>这次介绍一些Promise的拓展方法。</p>
+<hr>
+<h2 id="Promise-reject-和Promise-resolve"><a href="#Promise-reject-和Promis...
+            
         </div>
     </div>
     <div class="post-tags">
-        <% if (post.tags.data.length !== 0) { %>
+        
         <span class="icon">
             <i class="fa-solid fa-tags fa-fw"></i>
         </span>
-        <% } %>
-        <% let prev; %>
-        <% post.tags.data.forEach((tag) => { %>
+        
+        
+        
         <span class="tag">
-            <%
-                const colors = theme.colors.filter((color) => color !== prev);
-                let id = Math.floor(Math.random() * colors.length);
-                prev = colors[id];
-            %>
-            <a href="<%- url_for(tag.path) %>" style="color: <%- colors[id] %>"><%= tag.name %></a>
+            
+            <a href="/tags/ES6/" style="color: #03a9f4">ES6</a>
         </span>
-        <% }); %>
+        
     </div>
-    <a href="<%- url_for(post.path) %>" class="go-post">阅读全文</a>
+    <a href="/2026/04/30/Promise%E6%8B%93%E5%B1%95%E5%92%8C%E4%B8%80%E4%BA%9B%E5%BA%94%E7%94%A8/" class="go-post">阅读全文</a>
 </div>
-<% }); %>
+
+<div class="post">
+    <a href="/2026/04/29/Promise%E4%B8%8E%E5%BC%82%E6%AD%A5/">
+        <h2 class="post-title">Promise与异步</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/front-end/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                front-end
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/29
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <!-- 最后强制截断全文（取前200字符，避免显示全文） -->
+            <hr>
+<h1 id="异步与同步"><a href="#异步与同步" class="headerlink" title="异步与同步"></a>异步与同步</h1><ul>
+<li>同步是任务按照顺序执行，一个任务完成后再执行下一个，具有阻塞性</li>
+<li>异步与同步相对，异步支持在等待一个任务完成时先去执行其他任务</li>
+<li>异步可以提高程序的效率和响应性，但是需要处理好并发和...
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/ES6/" style="color: #00a596">ES6</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/29/Promise%E4%B8%8E%E5%BC%82%E6%AD%A5/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/28/%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E3%80%81this%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%BB%91%E5%AE%9A%E5%9C%BA%E6%99%AF/">
+        <h2 class="post-title">普通函数与箭头函数、this的四大绑定场景</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/front-end/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                front-end
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/28
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <!-- 最后强制截断全文（取前200字符，避免显示全文） -->
+            <p>写在前面：ES6默认开启严格模式</p>
+<hr>
+<h1 id="普通函数与箭头函数的区别"><a href="#普通函数与箭头函数的区别" class="headerlink" title="普通函数与箭头函数的区别"></a>普通函数与箭头函数的区别</h1><ul>
+<li>普通函数遵循this的四种绑定原则</li>
+<li>箭头函数的this是静态绑定的，固定绑定于箭头函数定义的...
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/ES6/" style="color: #ffa2c4">ES6</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/28/%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E3%80%81this%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%BB%91%E5%AE%9A%E5%9C%BA%E6%99%AF/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/27/ES6%E8%AF%AD%E6%B3%95-%E8%A7%A3%E6%9E%84%E3%80%81%E5%89%A9%E4%BD%99%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E5%B1%95%E5%BC%80%E8%BF%90%E7%AE%97%E7%AC%A6/">
+        <h2 class="post-title">ES6语法:解构、剩余运算符和拓展运算符</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/front-end/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                front-end
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/27
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <!-- 最后强制截断全文（取前200字符，避免显示全文） -->
+            <hr>
+<h1 id="解构"><a href="#解构" class="headerlink" title="解构"></a>解构</h1><p>解构可以用来赋值，可以解构数组和对象</p>
+<h2 id="解构数组"><a href="#解构数组" class="headerlink" title="解构数组"></a>解构数组</h2><ul>
+<li>数组解构的原理是利用迭代器  sym...
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/ES6/" style="color: #ff7d73">ES6</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/27/ES6%E8%AF%AD%E6%B3%95-%E8%A7%A3%E6%9E%84%E3%80%81%E5%89%A9%E4%BD%99%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E5%B1%95%E5%BC%80%E8%BF%90%E7%AE%97%E7%AC%A6/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2026/04/26/let-const-var%E5%92%8CTDZ/">
+        <h2 class="post-title">let-const-var和TDZ</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/front-end/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                front-end
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/4/26
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <!-- 最后强制截断全文（取前200字符，避免显示全文） -->
+            <hr>
+<h1 id="var的问题和局限"><a href="#var的问题和局限" class="headerlink" title="var的问题和局限"></a>var的问题和局限</h1><p>在ES5及以前，Var主要有下面的问题</p>
+<ul>
+<li><p>没有块级作用域，只有函数作用域，会挂载到window</p>
+</li>
+<li><p>存在变量提升（在未声明前已被定义）...
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/ES6/" style="color: #ff7d73">ES6</a>
+        </span>
+        
+    </div>
+    <a href="/2026/04/26/let-const-var%E5%92%8CTDZ/" class="go-post">阅读全文</a>
+</div>
 
         <div class="page-current">
     
