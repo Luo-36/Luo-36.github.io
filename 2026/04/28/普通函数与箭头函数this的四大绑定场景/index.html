@@ -181,7 +181,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/ES6/" style="color: #00a596">
+                <a href="/tags/ES6/" style="color: #ffa2c4">
                     ES6
                 </a>
             </span>
@@ -231,7 +231,7 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//call();</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sayHi</span>(<span class="params">greeting</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;greeting&#125;</span>,我是<span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = &#123;<span class="attr">name</span>: <span class="string">&#x27;alice&#x27;</span>&#125;;</span><br><span class="line">sayHi.<span class="title function_">call</span>(proson,<span class="string">&#x27;Hi&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//call();</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sayHi</span>(<span class="params">greeting</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;greeting&#125;</span>,我是<span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = &#123;<span class="attr">name</span>: <span class="string">&#x27;alice&#x27;</span>&#125;;</span><br><span class="line">sayHi.<span class="title function_">call</span>(person,<span class="string">&#x27;Hi&#x27;</span>);</span><br></pre></td></tr></table></figure>
 <p>结果：<br><code>Hi,我是alice</code></p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//apply();</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sum</span>(<span class="params">a,b,c</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">title</span>,a+b+c);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> title = &#123;<span class="attr">title</span>:<span class="string">&#x27;sum:&#x27;</span>&#125;;</span><br><span class="line">sum.<span class="title function_">apply</span>(title,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]);</span><br></pre></td></tr></table></figure>
 <p>结果是：<br><code>sum: 6</code></p>
