@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>手写Promise | Luoのblog</title>
+    <meta name="author" content="Luo-36" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING...</h2>
+                    <!-- <p>加载过慢请开启缓存 浏览器默认开启</p> -->
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>LUOのBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;LUOのBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>手写Promise</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/5/7
+        </span>
+        
+        <span class="category">
+            <a href="/categories/front-end/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                front-end
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/ES6/" style="color: #00a596">
+                    ES6
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="手写Promise"><a href="#手写Promise" class="headerlink" title="手写Promise"></a>手写Promise</h1><hr>
+<p>在面试中会手写Promise是有必要的，因为HR有可能会问（说白了就是“八股文”）。不过对Promise的理解也有很大帮助</p>
+<p>可能会稍稍复杂，请耐心看哦~</p>
+<hr>
+<h2 id="先写一个Promise的框架吧！"><a href="#先写一个Promise的框架吧！" class="headerlink" title="先写一个Promise的框架吧！"></a>先写一个Promise的框架吧！</h2><p>经过前面的学习，我们知道Promise可以 <code>new</code> 出来一个对象，于是我们可以想到用class来实现Promise。</p>
+<p>我们知道：</p>
+<ul>
+<li>Promise有三种状态：<ul>
+<li>pending</li>
+<li>fulfilled</li>
+<li>rejected</li>
+</ul>
+</li>
+<li>Promise需要传入一个函数，函数需要接收两个回调函数（resolve，reject）</li>
+<li>Promise可能会存多个回调函数，所以我们需要一个存回调函数的数组</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">myPromise</span> &#123;</span><br><span class="line">    <span class="comment">//我们先定义三个状态的静态变量，不用“硬编码”便于维护</span></span><br><span class="line">    <span class="keyword">static</span> <span class="variable constant_">PENDING</span> = <span class="string">&quot;pending&quot;</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="variable constant_">FULFILLED</span> = <span class="string">&quot;fulfilled&quot;</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="variable constant_">REJECTED</span> = <span class="string">&quot;rejected&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//接着写构造函数来初始化</span></span><br><span class="line">    <span class="comment">//executor是“执行器” ，根据Promise A+标准，我们如此命名</span></span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">executor</span>) &#123;</span><br><span class="line">        <span class="comment">//初始化实例的自有属性</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">state</span> = <span class="variable constant_">PENDING</span>;   <span class="comment">//存放状态</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> = <span class="literal">undefined</span>;  <span class="comment">//存放成功返回值</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">reason</span> = <span class="literal">undefined</span>;    <span class="comment">//存放失败原因</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">callbacks</span> = [];   <span class="comment">//存放回调函数</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//我们在实例内部定义两个函数,待会再来实现</span></span><br><span class="line">        <span class="keyword">const</span> <span class="title function_">resolve</span> = (<span class="params"></span>) =&gt; &#123;&#125;</span><br><span class="line">        <span class="keyword">const</span> <span class="title function_">reject</span> = (<span class="params"></span>) =&gt; &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="接下来添加resolve和reject"><a href="#接下来添加resolve和reject" class="headerlink" title="接下来添加resolve和reject"></a>接下来添加resolve和reject</h2><p>在原生Promise中我们会往Promise对象里面传入一个函数，这个函数接收两个回调函数（resolve，reject）</p>
+<p>其中：</p>
+<ul>
+<li><code>resolve</code> 需要传入 <code>value</code> 成功值</li>
+<li><code>reject</code> 需要传入 <code>reason</code> 失败原因</li>
+<li>执行时会改变Promise的状态为 （fulfilled 或者 rejected）</li>
+<li>两者互斥，不能重复执行，状态改一次后固定（只能由 <code>pending</code> 改变到 <code>fulfilled</code> 或者 <code>rejected</code> ）</li>
+<li>最后要微任务执行外界给的回调函数（onFulfilled 或者 onRejected）</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">myPromise</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="variable constant_">PENDING</span> = <span class="string">&quot;pending&quot;</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="variable constant_">FULFILLED</span> = <span class="string">&quot;fulfilled&quot;</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="variable constant_">REJECTED</span> = <span class="string">&quot;rejected&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">executor</span>) &#123;</span><br><span class="line">        <span class="comment">//初始化实例的自有属性</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">state</span> = <span class="variable constant_">PENDING</span>;   <span class="comment">//存放状态</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> = <span class="literal">undefined</span>;  <span class="comment">//存放成功返回值</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">reason</span> = <span class="literal">undefined</span>;    <span class="comment">//存放失败原因</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">callbacks</span> = [];   <span class="comment">//存放回调函数</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//这里的resolve和reject用的都是箭头函数，这样就可以不用用bind传实例的this给函数了</span></span><br><span class="line">        <span class="comment">//普通函数谁调用this指向谁，箭头函数自身不会挂载this，会向外找this</span></span><br><span class="line">        <span class="keyword">const</span> <span class="title function_">resolve</span> = (<span class="params">value</span>) =&gt; &#123;</span><br><span class="line">            <span class="comment">//注意：如果状态被改变过了就直接不执行了</span></span><br><span class="line">            <span class="comment">//这里的this指向的是实例的this</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">state</span> !== myPromise.<span class="property">PENDING</span>) <span class="keyword">return</span>;</span><br><span class="line">            <span class="comment">//改变Promise状态</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">state</span> = myPromise.<span class="property">FULFILLED</span>;</span><br><span class="line">            <span class="comment">//把传入的value给实例的value</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">value</span> = value;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//用微任务执行回调函数数组里的onFulfilled函数们</span></span><br><span class="line">            <span class="comment">//为什么用微任务，这样符合原生Promise的任务执行顺序</span></span><br><span class="line">            <span class="title function_">queueMicrotask</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">callbacks</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="title function_">onFulfilled</span>());</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//reject同理</span></span><br><span class="line">        <span class="keyword">const</span> <span class="title function_">reject</span> = (<span class="params">reason</span>) =&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">state</span> !== myPromise.<span class="property">PENDING</span>) <span class="keyword">return</span>;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">state</span> = myPromise.<span class="property">REJECTED</span>;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">reason</span> = reason;</span><br><span class="line"></span><br><span class="line">            <span class="title function_">queueMicrotask</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">callbacks</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="title function_">onRejected</span>());</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//写完resolve和reject的逻辑应该执行executor</span></span><br><span class="line">        <span class="comment">//executor里的两个参数就是我们刚刚写完的resolve和reject</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="title function_">executor</span>(resolve,reject);</span><br><span class="line">        &#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">            <span class="comment">//如果有错误用catch接住</span></span><br><span class="line">            <span class="title function_">reject</span>(err);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="实现then和链式调用"><a href="#实现then和链式调用" class="headerlink" title="实现then和链式调用"></a>实现then和链式调用</h2><p>接下来我们来实现 <code>then</code> 原型方法</p>
+<p>我们需要</p>
+<ul>
+<li>接收两个参数（成功的回调函数，失败的回调函数）<ul>
+<li>一般then是用来处理成功的情况</li>
+<li>但是原生Promise里支持双回调，故我们这里传入两个</li>
+<li>这样也有一个好处：可以更近的处理错误err</li>
+<li>catch本质也只是调用then里的失败处理函数而已</li>
+</ul>
+</li>
+<li>返回一个新的Promise，实现链式调用</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Promise</span> &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">executor</span>) &#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="title function_">then</span>(<span class="params">onFulfilled, onRejected</span>) &#123;</span><br><span class="line">        <span class="comment">//我们先要判断传进来的是不是函数，如果不是函数，而是一个值的话需要实现 “值传递” 传给下一个 then</span></span><br><span class="line">        <span class="comment">//先用typeof来判断是不是函数</span></span><br><span class="line">        <span class="comment">// 如果不是把值return，传给下一个then（如果是空就返回空，不会影响的）</span></span><br><span class="line">        <span class="comment">// val =&gt; val 相当于：</span></span><br><span class="line">        <span class="comment">// function (val) &#123; return val;&#125;</span></span><br><span class="line">        onFulfilled = <span class="keyword">typeof</span> onFulfilled === <span class="string">&#x27;function&#x27;</span> ? onFulfilled : <span class="function"><span class="params">val</span> =&gt;</span> val;</span><br><span class="line">        onRejected = <span class="keyword">typeof</span> onRejected === <span class="string">&#x27;function&#x27;</span> ? onRejected : <span class="function"><span class="params">err</span> =&gt;</span> &#123; <span class="keyword">throw</span> err &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//接下来需要返回一个新的Promise</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title function_">myPromise</span>(<span class="function">(<span class="params">resolve,reject</span>) =&gt;</span> &#123;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//处理函数（核心）：处理回调的返回值，决定新Promise的状态</span></span><br><span class="line">            <span class="comment">//cb:传入的回调函数 arg：传入回调函数的值（value和reason）</span></span><br><span class="line">            <span class="keyword">const</span> <span class="title function_">handle</span> = (<span class="params">cb, arg</span>) =&gt; &#123;</span><br><span class="line">                <span class="comment">//接收用户传的回调函数并执行（onFulfilled，onRejected）</span></span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="comment">//接收用户传的回调函数并执行（onFulfilled，onRejected）</span></span><br><span class="line">                    <span class="keyword">const</span> res = <span class="title function_">cb</span>(arg);</span><br><span class="line"></span><br><span class="line">                    <span class="comment">//如果返回一个promise对象</span></span><br><span class="line">                    <span class="keyword">if</span>(res <span class="keyword">instanceof</span> myPromise) &#123;</span><br><span class="line">                        <span class="comment">//执行对应的then（向下传递调用）</span></span><br><span class="line">                        res.<span class="title function_">then</span>(resolve, reject);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="comment">//如果不是，则执行对应的resolve方法</span></span><br><span class="line">                        <span class="title function_">resolve</span>(res);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">                    <span class="title function_">reject</span>(err);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//刚刚写的handle，接下来就会用到啦</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//如果状态为  `fulfilled`，执行当前的成功函数</span></span><br><span class="line">            <span class="comment">//如果为 `rejected`，执行失败函数</span></span><br><span class="line">            <span class="comment">//如果还是 `pending`，则把当前的函数存入回调函数数组</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">state</span> === myPromise.<span class="property">FULFILLED</span>) &#123;</span><br><span class="line">                <span class="title function_">queueMicrotask</span>(<span class="function">() =&gt;</span> <span class="title function_">handle</span>(onFulfilled, <span class="variable language_">this</span>.<span class="property">value</span>));</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">state</span> === myPromise.<span class="property">REJECTED</span>) &#123;</span><br><span class="line">                <span class="title function_">queueMicrotask</span>(<span class="function">() =&gt;</span> <span class="title function_">handle</span>(onRejected, <span class="variable language_">this</span>.<span class="property">reason</span>));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//如果还在pending</span></span><br><span class="line">                <span class="comment">//存入回调函数，等resolve和rejected 触发</span></span><br><span class="line">                <span class="comment">//这里存入的是有两个函数属性的对象</span></span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">callbacks</span>.<span class="title function_">push</span>(&#123;</span><br><span class="line">                    <span class="attr">onFulfilled</span>: <span class="function">() =&gt;</span> <span class="title function_">handle</span>(onFulfilled, <span class="variable language_">this</span>.<span class="property">value</span>),</span><br><span class="line">                    <span class="attr">onRejected</span>: <span class="function">() =&gt;</span> <span class="title function_">handle</span>(onRejected, <span class="variable language_">this</span>.<span class="property">reason</span>)</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//catch函数，接收失败的函数</span></span><br><span class="line">    <span class="comment">//其实就是调用then，执行then里面的失败函数</span></span><br><span class="line">    <span class="keyword">catch</span>(onRejected) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">then</span>(<span class="literal">null</span>, onRejected);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>下面是完整的代码</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">myPromise</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="variable constant_">PENDING</span> = <span class="string">&quot;pending&quot;</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="variable constant_">FULFILLED</span> = <span class="string">&quot;fulfilled&quot;</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="variable constant_">REJECTED</span> = <span class="string">&quot;rejected&quot;</span>;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">executor</span>) &#123;</span><br><span class="line">         </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">state</span> = myPromise.<span class="property">PENDING</span>;   </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> = <span class="literal">undefined</span>;  </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">reason</span> = <span class="literal">undefined</span>;    </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">callbacks</span> = [];   </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">const</span> <span class="title function_">resolve</span> = (<span class="params">value</span>) =&gt; &#123;              </span><br><span class="line">            <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">state</span> !== myPromise.<span class="property">PENDING</span>) <span class="keyword">return</span>;              </span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">state</span> = myPromise.<span class="property">FULFILLED</span>;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">value</span> = value;</span><br><span class="line"></span><br><span class="line">            <span class="title function_">queueMicrotask</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">callbacks</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="title function_">onFulfilled</span>());</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> <span class="title function_">reject</span> = (<span class="params">reason</span>) =&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">state</span> !== myPromise.<span class="property">PENDING</span>) <span class="keyword">return</span>;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">state</span> = myPromise.<span class="property">REJECTED</span>;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">reason</span> = reason;</span><br><span class="line"></span><br><span class="line">            <span class="title function_">queueMicrotask</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">callbacks</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="title function_">onRejected</span>());</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="title function_">executor</span>(resolve,reject);</span><br><span class="line">        &#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">            <span class="title function_">reject</span>(err);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">then</span>(<span class="params">onFulfilled, onRejected</span>) &#123;</span><br><span class="line">        onFulfilled = <span class="keyword">typeof</span> onFulfilled === <span class="string">&#x27;function&#x27;</span> ? onFulfilled : <span class="function"><span class="params">val</span> =&gt;</span> val;</span><br><span class="line">        onRejected = <span class="keyword">typeof</span> onRejected === <span class="string">&#x27;function&#x27;</span> ? onRejected : <span class="function"><span class="params">err</span> =&gt;</span> &#123; <span class="keyword">throw</span> err &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title function_">myPromise</span>(<span class="function">(<span class="params">resolve,reject</span>) =&gt;</span> &#123;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">const</span> <span class="title function_">handle</span> = (<span class="params">cb, arg</span>) =&gt; &#123;</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    </span><br><span class="line">                    <span class="keyword">const</span> res = <span class="title function_">cb</span>(arg);</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span>(res <span class="keyword">instanceof</span> myPromise) &#123;</span><br><span class="line">                        res.<span class="title function_">then</span>(resolve, reject);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="title function_">resolve</span>(res);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">                    <span class="title function_">reject</span>(err);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">state</span> === myPromise.<span class="property">FULFILLED</span>) &#123;</span><br><span class="line">                <span class="title function_">queueMicrotask</span>(<span class="function">() =&gt;</span> <span class="title function_">handle</span>(onFulfilled, <span class="variable language_">this</span>.<span class="property">value</span>));</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">state</span> === myPromise.<span class="property">REJECTED</span>) &#123;</span><br><span class="line">                <span class="title function_">queueMicrotask</span>(<span class="function">() =&gt;</span> <span class="title function_">handle</span>(onRejected, <span class="variable language_">this</span>.<span class="property">reason</span>));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">callbacks</span>.<span class="title function_">push</span>(&#123;</span><br><span class="line">                    <span class="attr">onFulfilled</span>: <span class="function">() =&gt;</span> <span class="title function_">handle</span>(onFulfilled, <span class="variable language_">this</span>.<span class="property">value</span>),</span><br><span class="line">                    <span class="attr">onRejected</span>: <span class="function">() =&gt;</span> <span class="title function_">handle</span>(onRejected, <span class="variable language_">this</span>.<span class="property">reason</span>)</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">catch</span>(onRejected) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">then</span>(<span class="literal">null</span>, onRejected);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//这些是测试代码：</span></span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="title function_">myPromise</span>(<span class="function">(<span class="params">resolveee,rejecttt</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;1.Promise开始&quot;</span>);</span><br><span class="line">    <span class="title function_">resolveee</span>(<span class="string">&quot;1ok了&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">p.<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;2.到第一个then里了&quot;</span>, res);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;2ok了&quot;</span>;</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="property">then</span> (<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;3.到第二个then了&quot;</span>, res);</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">catch</span>(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(err,<span class="string">&quot;错误&quot;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2025 - 2026 Luoのblog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Luo-36
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
