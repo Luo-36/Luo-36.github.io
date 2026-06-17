@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>async/await学习 | Luoのblog</title>
+    <title>async-await学习 和 事件循环 | Luoのblog</title>
     <meta name="author" content="Luo-36" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -153,7 +153,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>async/await学习</h1>
+        <h1>async-await学习 和 事件循环</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -181,7 +181,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/ES6/" style="color: #00bcd4">
+                <a href="/tags/ES6/" style="color: #03a9f4">
                     ES6
                 </a>
             </span>
@@ -210,8 +210,8 @@
 </ul>
 <hr>
 <h1 id="async和await学习"><a href="#async和await学习" class="headerlink" title="async和await学习"></a>async和await学习</h1><hr>
-<h1 id="async和await的语法和返回值"><a href="#async和await的语法和返回值" class="headerlink" title="async和await的语法和返回值"></a>async和await的语法和返回值</h1><ul>
-<li><code>async</code>用于修饰函数，被修饰的函数会返回一个Promise对象<ul>
+<h2 id="async和await的语法和返回值"><a href="#async和await的语法和返回值" class="headerlink" title="async和await的语法和返回值"></a>async和await的语法和返回值</h2><ul>
+<li><code>async</code>用于修饰函数，被修饰的函数会返回一个Promise对象（就是一个标记，表示可以被await暂停）<ul>
 <li>语法： <code>async function function() { ... }</code></li>
 <li>该关键字只能加在函数前面（普通函数，箭头函数和类方法都可以）</li>
 <li>因为会返回一个 <code>Promise</code> 对象，所以async函数可以用 <code>.then()</code>、<code>.catch()</code> 链式调用</li>
@@ -225,11 +225,70 @@
 <li>后跟函数调用： <code>let res3 = await(() =&gt; &#39;函数返回值&#39;)()</code> ,会先执行函数，再await函数返回值</li>
 </ul>
 </li>
+<li>在 <code>async</code> 函数里，执行到 <code>await</code> 会暂停后面的函数，把处理交给浏览器，继续去执行同步任务。 <code>await</code> 后面的函数会变成微任务，存入任务栈。fa</li>
+<li></li>
 </ul>
 </li>
 </ul>
 <p>完整执行流程示例：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;1.开始执行同步代码&quot;</span>);</span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">asyncfunc</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;3.已进入async函数&quot;</span>);</span><br><span class="line">    <span class="comment">//await调用resolve，把结果给res</span></span><br><span class="line">    <span class="keyword">let</span> res = <span class="keyword">await</span> <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="string">&quot;await给的结果&quot;</span>);</span><br><span class="line">    <span class="comment">//在await之后的为“微任务”</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;6.执行在await后面的代码&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;2.调用async函数&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> p = <span class="title function_">asyncfunc</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;4.async函数返回了一个结果&quot;</span>);</span><br><span class="line"></span><br><span class="line">p.<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;7.then已执行&quot;</span>,<span class="string">&quot;已拿到：&quot;</span>,res));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;5.所有同步代码执行结束！&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;1.开始执行同步代码&quot;</span>);</span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">asyncfunc</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;3.已进入async函数&quot;</span>);</span><br><span class="line">    <span class="comment">//await调用resolve，把结果给res</span></span><br><span class="line">    <span class="keyword">let</span> res = <span class="keyword">await</span> <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="string">&quot;await给的结果&quot;</span>);</span><br><span class="line">    <span class="comment">//同步任务结束，开始执行微任务</span></span><br><span class="line">    <span class="comment">//在await之后的为“微任务”</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;6.执行在await后面的代码&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;2.调用async函数&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> p = <span class="title function_">asyncfunc</span>();</span><br><span class="line"><span class="comment">//async函数遇到await了，继续执行同步任务</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;4.async函数返回了一个结果&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//遇到异步任务</span></span><br><span class="line">p.<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;7.then已执行&quot;</span>,<span class="string">&quot;已拿到：&quot;</span>,res));</span><br><span class="line"><span class="comment">//继续执行同步任务</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;5.所有同步代码执行结束！&quot;</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="用async和await来简化Promise写法"><a href="#用async和await来简化Promise写法" class="headerlink" title="用async和await来简化Promise写法"></a>用async和await来简化Promise写法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//模拟接口函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">request1</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> <span class="title function_">resolve</span>(<span class="string">&#x27;结果1&#x27;</span>), <span class="number">1000</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">request2</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> <span class="title function_">resolve</span>(<span class="string">&#x27;结果2&#x27;</span>), <span class="number">1000</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">request3</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> <span class="title function_">resolve</span>(<span class="string">&#x27;结果3&#x27;</span>), <span class="number">1000</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//用async和await来简化Promise写法</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">dorequire</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> res1 = <span class="keyword">await</span> <span class="title function_">request1</span>();</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res1);</span><br><span class="line">    <span class="keyword">let</span> res2 = <span class="keyword">await</span> <span class="title function_">request2</span>();</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res2);</span><br><span class="line">    <span class="keyword">let</span> res3 = <span class="keyword">await</span> <span class="title function_">request3</span>();</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res3);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="用async和await来解决串行和并行请求"><a href="#用async和await来解决串行和并行请求" class="headerlink" title="用async和await来解决串行和并行请求"></a>用async和await来解决串行和并行请求</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 通用模拟接口：传入接口名和耗时，返回 Promise</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">api</span>(<span class="params">name, time</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">resolve</span>(<span class="string">`接口<span class="subst">$&#123;name&#125;</span>返回数据，耗时<span class="subst">$&#123;time&#125;</span>ms`</span>)</span><br><span class="line">        &#125;, time)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">serialDemo</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;开始串行请求&quot;</span>);</span><br><span class="line">    <span class="keyword">let</span> start = <span class="title class_">Date</span>.<span class="title function_">now</span>();</span><br><span class="line">    <span class="keyword">let</span> res1 = <span class="keyword">await</span> <span class="title function_">api</span>(<span class="string">&#x27;getA&#x27;</span>, <span class="number">500</span>);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res1);</span><br><span class="line">    <span class="keyword">let</span> res2 = <span class="keyword">await</span> <span class="title function_">api</span>(<span class="string">&#x27;getB&#x27;</span>, <span class="number">500</span>);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res2);</span><br><span class="line">    <span class="keyword">let</span> res3 = <span class="keyword">await</span> <span class="title function_">api</span>(<span class="string">&#x27;getC&#x27;</span>, <span class="number">500</span>);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res3);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`用时：<span class="subst">$&#123;<span class="built_in">Date</span>.now()-start&#125;</span>ms`</span>);    </span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">serialDemo</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">parallelDemo</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;开始并行请求---&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> start = <span class="title class_">Date</span>.<span class="title function_">now</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> p1 = <span class="title function_">api</span>(<span class="string">&#x27;get1&#x27;</span>,<span class="number">500</span>);</span><br><span class="line">    <span class="keyword">let</span> p2 = <span class="title function_">api</span>(<span class="string">&#x27;get2&#x27;</span>,<span class="number">500</span>);</span><br><span class="line">    <span class="keyword">let</span> p3 = <span class="title function_">api</span>(<span class="string">&#x27;get3&#x27;</span>,<span class="number">500</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> [res1, res2, res3] = <span class="keyword">await</span> <span class="title class_">Promise</span>.<span class="title function_">all</span>([p1, p2, p3]);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res1);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res2);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res3);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`并发耗时：<span class="subst">$&#123;<span class="built_in">Date</span>.now()-start&#125;</span>ms`</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">parallelDemo</span>();</span><br></pre></td></tr></table></figure>
+
+<p>可以执行看看结果，关于结果的执行顺序将会在“事件循环”里解释。</p>
+<hr>
+<h1 id="事件循环（Event-Loop）"><a href="#事件循环（Event-Loop）" class="headerlink" title="事件循环（Event-Loop）"></a>事件循环（Event-Loop）</h1><p>浏览器事件循环把任务分成以下几类：</p>
+<ul>
+<li>同步任务</li>
+<li>异步任务<ul>
+<li>宏任务</li>
+<li>微任务</li>
+</ul>
+</li>
+</ul>
+<p>执行顺序（自上而下）：</p>
+<ul>
+<li>同步任务1</li>
+<li>同步任务2</li>
+<li>同步任务3</li>
+<li>script的微任务</li>
+<li>（script也是一个宏任务，所以会先执行代码里的其他微任务（在script这个宏任务下））</li>
+<li>宏任务1<ul>
+<li>微任务1</li>
+<li>微任务2</li>
+<li>微任务3</li>
+</ul>
+</li>
+<li>宏任务2<ul>
+<li>微任务1</li>
+<li>微任务2</li>
+<li>微任务3</li>
+</ul>
+</li>
+<li>（后续任务。。。）</li>
+</ul>
+<p>先执行完同步任务，再执行异步任务。<br>遇到宏任务，执行完里面的微任务，再执行下一个宏任务。</p>
+<p>示意图：<br><img src="/images/insertimg/event-loop.png" alt="event-loop"></p>
+<ul>
+<li>遇到宏任务，把宏任务加入宏任务队列</li>
+<li>该宏任务放入回调栈</li>
+<li>然后把宏任务里面的微任务加入微任务队列</li>
+<li>把当前微任务队列里的微任务FIFO放入回调栈，执行清空回调栈里的微任务</li>
+<li>取下一个宏任务，循环以上步骤</li>
+</ul>
+<h2 id="关于上面的代码执行顺序分析"><a href="#关于上面的代码执行顺序分析" class="headerlink" title="关于上面的代码执行顺序分析"></a>关于上面的代码执行顺序分析</h2><figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">开始串行请求</span><br><span class="line">开始并行请求<span class="comment">---</span></span><br><span class="line">接口getA返回数据，耗时<span class="number">500</span>ms</span><br><span class="line">接口get1返回数据，耗时<span class="number">500</span>ms</span><br><span class="line">接口get2返回数据，耗时<span class="number">500</span>ms</span><br><span class="line">接口get3返回数据，耗时<span class="number">500</span>ms</span><br><span class="line">并发耗时：<span class="number">505</span>ms</span><br><span class="line">接口getB返回数据，耗时<span class="number">500</span>ms</span><br><span class="line">接口getC返回数据，耗时<span class="number">500</span>ms</span><br><span class="line">用时：<span class="number">1549</span>ms</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>同步执行serialDemo，打印开始串行请求（同步任务），触发getA定时器，函数挂起（A开始计时）</li>
+<li>执行parallelDemo，打印开始并行请求（同步任务），依次触发get1&#x2F;get2&#x2F;get3定时器，函数挂起</li>
+<li>由于A先注册A的500ms先到期，然后四个 500ms 定时器同时间到期，按注册先后入队。此时任务队列：（A，1，2，3）</li>
+<li>先执行getA，打印结果，立刻新建getB定时器（B开始计时），再次挂起串行函数</li>
+<li>再依次执行get1、get2、get3，打印耗时</li>
+<li>后续依次执行getB、getC，全部走完</li>
+</ol>
+
     </div>
     
     

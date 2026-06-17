@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>git的指令 | Luoのblog</title>
+    <meta name="author" content="Luo-36" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING...</h2>
+                    <!-- <p>加载过慢请开启缓存 浏览器默认开启</p> -->
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>LUOのBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;LUOのBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>git的指令</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/6/17
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="Git-全套常用命令大全（分场景，新手长期备查）"><a href="#Git-全套常用命令大全（分场景，新手长期备查）" class="headerlink" title="Git 全套常用命令大全（分场景，新手长期备查）"></a>Git 全套常用命令大全（分场景，新手长期备查）</h1><h2 id="一、初始配置（电脑只执行一次）"><a href="#一、初始配置（电脑只执行一次）" class="headerlink" title="一、初始配置（电脑只执行一次）"></a>一、初始配置（电脑只执行一次）</h2><h3 id="1-身份配置（提交代码携带你的名字邮箱）"><a href="#1-身份配置（提交代码携带你的名字邮箱）" class="headerlink" title="1. 身份配置（提交代码携带你的名字邮箱）"></a>1. 身份配置（提交代码携带你的名字邮箱）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 设置用户名</span></span><br><span class="line">git config --global user.name <span class="string">&quot;你的昵称&quot;</span></span><br><span class="line"><span class="comment"># 设置邮箱（GitHub注册邮箱）</span></span><br><span class="line">git config --global user.email <span class="string">&quot;xxx@xxx.com&quot;</span></span><br><span class="line"><span class="comment"># 查看全部全局配置</span></span><br><span class="line">git config --global --list</span><br></pre></td></tr></table></figure>
+<h3 id="2-换行符警告消除（Windows必配）"><a href="#2-换行符警告消除（Windows必配）" class="headerlink" title="2. 换行符警告消除（Windows必配）"></a>2. 换行符警告消除（Windows必配）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global core.autocrlf <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-HTTPS凭证缓存（不用重复输令牌）"><a href="#3-HTTPS凭证缓存（不用重复输令牌）" class="headerlink" title="3. HTTPS凭证缓存（不用重复输令牌）"></a>3. HTTPS凭证缓存（不用重复输令牌）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global credential.helper manager-core</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、仓库创建-克隆"><a href="#二、仓库创建-克隆" class="headerlink" title="二、仓库创建 &amp; 克隆"></a>二、仓库创建 &amp; 克隆</h2><h3 id="1-本地新建Git仓库（已有本地代码）"><a href="#1-本地新建Git仓库（已有本地代码）" class="headerlink" title="1. 本地新建Git仓库（已有本地代码）"></a>1. 本地新建Git仓库（已有本地代码）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 进入项目文件夹</span></span><br><span class="line"><span class="built_in">cd</span> 项目路径</span><br><span class="line"><span class="comment"># 初始化git</span></span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
+<h3 id="2-拉取远程已有项目到本地"><a href="#2-拉取远程已有项目到本地" class="headerlink" title="2. 拉取远程已有项目到本地"></a>2. 拉取远程已有项目到本地</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># SSH地址</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:xxx/xxx.git</span><br><span class="line"><span class="comment"># HTTPS地址</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/xxx/xxx.git</span><br><span class="line"><span class="comment"># 克隆到指定文件夹</span></span><br><span class="line">git <span class="built_in">clone</span> 仓库地址 自定义文件夹名</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、文件暂存、提交（日常最常用）"><a href="#三、文件暂存、提交（日常最常用）" class="headerlink" title="三、文件暂存、提交（日常最常用）"></a>三、文件暂存、提交（日常最常用）</h2><h3 id="1-查看文件状态"><a href="#1-查看文件状态" class="headerlink" title="1. 查看文件状态"></a>1. 查看文件状态</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 完整状态</span></span><br><span class="line">git status</span><br><span class="line"><span class="comment"># 简洁精简版</span></span><br><span class="line">git status -s</span><br></pre></td></tr></table></figure>
+<h3 id="2-添加文件到暂存区"><a href="#2-添加文件到暂存区" class="headerlink" title="2. 添加文件到暂存区"></a>2. 添加文件到暂存区</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 添加单个文件</span></span><br><span class="line">git add index.html</span><br><span class="line"><span class="comment"># 添加所有修改、新增文件</span></span><br><span class="line">git add .</span><br><span class="line"><span class="comment"># 只添加修改过的文件，忽略新建文件</span></span><br><span class="line">git add -u</span><br></pre></td></tr></table></figure>
+<h3 id="3-提交到本地仓库（必须带备注）"><a href="#3-提交到本地仓库（必须带备注）" class="headerlink" title="3. 提交到本地仓库（必须带备注）"></a>3. 提交到本地仓库（必须带备注）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;这里写本次修改内容&quot;</span></span><br><span class="line"><span class="comment"># 简写：修改后直接提交（跳过git add，仅修改文件生效，新增文件不行）</span></span><br><span class="line">git commit -am <span class="string">&quot;修改xxx&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-修改上一次提交的备注（没push远程可用）"><a href="#4-修改上一次提交的备注（没push远程可用）" class="headerlink" title="4. 修改上一次提交的备注（没push远程可用）"></a>4. 修改上一次提交的备注（没push远程可用）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit --amend</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、远程仓库操作（GitHub-Gitee）"><a href="#四、远程仓库操作（GitHub-Gitee）" class="headerlink" title="四、远程仓库操作（GitHub&#x2F;Gitee）"></a>四、远程仓库操作（GitHub&#x2F;Gitee）</h2><h3 id="1-查看远程绑定"><a href="#1-查看远程绑定" class="headerlink" title="1. 查看远程绑定"></a>1. 查看远程绑定</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<h3 id="2-删除旧远程、绑定新远程"><a href="#2-删除旧远程、绑定新远程" class="headerlink" title="2. 删除旧远程、绑定新远程"></a>2. 删除旧远程、绑定新远程</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 删除origin</span></span><br><span class="line">git remote remove origin</span><br><span class="line"><span class="comment"># 绑定SSH远程</span></span><br><span class="line">git remote add origin git@github.com:Luo-36/Luo-s-code.git</span><br><span class="line"><span class="comment"># 绑定HTTPS远程</span></span><br><span class="line">git remote add origin https://github.com/Luo-36/Luo-s-code.git</span><br></pre></td></tr></table></figure>
+<h3 id="3-修改远程仓库地址"><a href="#3-修改远程仓库地址" class="headerlink" title="3. 修改远程仓库地址"></a>3. 修改远程仓库地址</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote set-url origin 新仓库地址</span><br></pre></td></tr></table></figure>
+<h3 id="4-拉取远程代码"><a href="#4-拉取远程代码" class="headerlink" title="4. 拉取远程代码"></a>4. 拉取远程代码</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 拉取默认分支</span></span><br><span class="line">git pull</span><br><span class="line"><span class="comment"># 拉取指定分支，解决本地远程仓库无关联历史</span></span><br><span class="line">git pull origin main --allow-unrelated-histories</span><br></pre></td></tr></table></figure>
+<h3 id="5-推送本地代码到远程"><a href="#5-推送本地代码到远程" class="headerlink" title="5. 推送本地代码到远程"></a>5. 推送本地代码到远程</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 第一次推送绑定分支</span></span><br><span class="line">git push -u origin main</span><br><span class="line"><span class="comment"># 后续直接推送</span></span><br><span class="line">git push</span><br><span class="line"><span class="comment"># 强制推送（慎用，单人仓库覆盖远程）</span></span><br><span class="line">git push -f origin main</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、分支全套操作（开发核心）"><a href="#五、分支全套操作（开发核心）" class="headerlink" title="五、分支全套操作（开发核心）"></a>五、分支全套操作（开发核心）</h2><h3 id="1-查看分支"><a href="#1-查看分支" class="headerlink" title="1. 查看分支"></a>1. 查看分支</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 本地分支</span></span><br><span class="line">git branch</span><br><span class="line"><span class="comment"># 本地+远程所有分支</span></span><br><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
+<h3 id="2-创建-切换分支"><a href="#2-创建-切换分支" class="headerlink" title="2. 创建&#x2F;切换分支"></a>2. 创建&#x2F;切换分支</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建分支</span></span><br><span class="line">git branch dev</span><br><span class="line"><span class="comment"># 切换分支</span></span><br><span class="line">git switch dev</span><br><span class="line"><span class="comment"># 旧版本写法</span></span><br><span class="line">git checkout dev</span><br><span class="line"><span class="comment"># 创建并立刻切换新分支（最常用）</span></span><br><span class="line">git switch -c feature/login</span><br><span class="line"><span class="comment"># 旧版简写</span></span><br><span class="line">git checkout -b feature/login</span><br></pre></td></tr></table></figure>
+<h3 id="3-重命名本地分支"><a href="#3-重命名本地分支" class="headerlink" title="3. 重命名本地分支"></a>3. 重命名本地分支</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># master改main</span></span><br><span class="line">git branch -M main</span><br></pre></td></tr></table></figure>
+<h3 id="4-合并分支"><a href="#4-合并分支" class="headerlink" title="4. 合并分支"></a>4. 合并分支</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切到主分支</span></span><br><span class="line">git switch main</span><br><span class="line"><span class="comment"># 将dev分支合并到main</span></span><br><span class="line">git merge dev</span><br></pre></td></tr></table></figure>
+<h3 id="5-删除分支"><a href="#5-删除分支" class="headerlink" title="5. 删除分支"></a>5. 删除分支</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 删除本地分支</span></span><br><span class="line">git branch -d dev</span><br><span class="line"><span class="comment"># 删除远程分支</span></span><br><span class="line">git push origin --delete dev</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、冲突处理"><a href="#六、冲突处理" class="headerlink" title="六、冲突处理"></a>六、冲突处理</h2><ol>
+<li>合并出现冲突后查看冲突文件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>打开冲突文件，删除 <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD / ======= / &gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> 标记，保留需要的代码</li>
+<li>标记冲突解决</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>提交合并记录</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;解决合并冲突&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="七、查看提交日志"><a href="#七、查看提交日志" class="headerlink" title="七、查看提交日志"></a>七、查看提交日志</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 完整日志</span></span><br><span class="line">git <span class="built_in">log</span></span><br><span class="line"><span class="comment"># 单行简洁日志（推荐）</span></span><br><span class="line">git <span class="built_in">log</span> --oneline</span><br><span class="line"><span class="comment"># 查看所有操作记录（找回误删提交）</span></span><br><span class="line">git reflog</span><br><span class="line"><span class="comment"># 查看分支图文日志</span></span><br><span class="line">git <span class="built_in">log</span> --oneline --graph</span><br></pre></td></tr></table></figure>
+
+<h2 id="八、撤销、回滚操作（踩坑救命命令）"><a href="#八、撤销、回滚操作（踩坑救命命令）" class="headerlink" title="八、撤销、回滚操作（踩坑救命命令）"></a>八、撤销、回滚操作（踩坑救命命令）</h2><h3 id="1-撤销工作区修改（文件改坏，恢复上次提交）"><a href="#1-撤销工作区修改（文件改坏，恢复上次提交）" class="headerlink" title="1. 撤销工作区修改（文件改坏，恢复上次提交）"></a>1. 撤销工作区修改（文件改坏，恢复上次提交）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 单个文件</span></span><br><span class="line">git checkout -- index.html</span><br><span class="line"><span class="comment"># 全部文件恢复</span></span><br><span class="line">git checkout -- .</span><br></pre></td></tr></table></figure>
+<h3 id="2-撤回暂存区（git-add-之后反悔）"><a href="#2-撤回暂存区（git-add-之后反悔）" class="headerlink" title="2. 撤回暂存区（git add 之后反悔）"></a>2. 撤回暂存区（git add 之后反悔）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 单个文件取消暂存</span></span><br><span class="line">git reset HEAD index.html</span><br><span class="line"><span class="comment"># 全部取消暂存</span></span><br><span class="line">git reset HEAD .</span><br></pre></td></tr></table></figure>
+<h3 id="3-回退本地提交（未push远程）"><a href="#3-回退本地提交（未push远程）" class="headerlink" title="3. 回退本地提交（未push远程）"></a>3. 回退本地提交（未push远程）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 软回退：保留代码，只撤销commit</span></span><br><span class="line">git reset 提交ID</span><br><span class="line"><span class="comment"># 硬回退：彻底删除本次修改（谨慎）</span></span><br><span class="line">git reset --hard 提交ID</span><br></pre></td></tr></table></figure>
+<h3 id="4-远程仓库回滚（已push，多人协作唯一安全方式）"><a href="#4-远程仓库回滚（已push，多人协作唯一安全方式）" class="headerlink" title="4. 远程仓库回滚（已push，多人协作唯一安全方式）"></a>4. 远程仓库回滚（已push，多人协作唯一安全方式）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git revert 提交ID</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<h2 id="九、-gitignore-配套清理命令"><a href="#九、-gitignore-配套清理命令" class="headerlink" title="九、.gitignore 配套清理命令"></a>九、.gitignore 配套清理命令</h2><p>文件已经被git追踪，新增忽略规则不生效时执行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 取消单个文件追踪</span></span><br><span class="line">git <span class="built_in">rm</span> --cached 文件名</span><br><span class="line"><span class="comment"># 取消整个文件夹追踪</span></span><br><span class="line">git <span class="built_in">rm</span> --cached -r node_modules/</span><br><span class="line"><span class="comment"># 清空全部缓存，重新读取gitignore</span></span><br><span class="line">git <span class="built_in">rm</span> --cached -r .</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;更新gitignore过滤文件&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="十、储藏代码（临时切换分支，不想提交半成品）"><a href="#十、储藏代码（临时切换分支，不想提交半成品）" class="headerlink" title="十、储藏代码（临时切换分支，不想提交半成品）"></a>十、储藏代码（临时切换分支，不想提交半成品）</h2><h3 id="1-储藏当前所有修改"><a href="#1-储藏当前所有修改" class="headerlink" title="1. 储藏当前所有修改"></a>1. 储藏当前所有修改</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git stash</span><br><span class="line"><span class="comment"># 储藏并添加备注区分</span></span><br><span class="line">git stash save <span class="string">&quot;临时储藏页面开发代码&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-查看储藏列表"><a href="#2-查看储藏列表" class="headerlink" title="2. 查看储藏列表"></a>2. 查看储藏列表</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git stash list</span><br></pre></td></tr></table></figure>
+<h3 id="3-恢复储藏代码（保留储藏记录）"><a href="#3-恢复储藏代码（保留储藏记录）" class="headerlink" title="3. 恢复储藏代码（保留储藏记录）"></a>3. 恢复储藏代码（保留储藏记录）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git stash apply</span><br></pre></td></tr></table></figure>
+<h3 id="4-恢复并删除储藏记录"><a href="#4-恢复并删除储藏记录" class="headerlink" title="4. 恢复并删除储藏记录"></a>4. 恢复并删除储藏记录</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git stash pop</span><br></pre></td></tr></table></figure>
+<h3 id="5-删除储藏"><a href="#5-删除储藏" class="headerlink" title="5. 删除储藏"></a>5. 删除储藏</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git stash drop</span><br><span class="line"><span class="comment"># 清空全部储藏</span></span><br><span class="line">git stash clear</span><br></pre></td></tr></table></figure>
+
+<h2 id="十一、SSH密钥相关命令"><a href="#十一、SSH密钥相关命令" class="headerlink" title="十一、SSH密钥相关命令"></a>十一、SSH密钥相关命令</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成ssh密钥</span></span><br><span class="line">ssh-keygen -t ed25519 -C <span class="string">&quot;你的github邮箱&quot;</span></span><br><span class="line"><span class="comment"># 查看公钥</span></span><br><span class="line"><span class="built_in">cat</span> ~/.ssh/id_ed25519.pub</span><br><span class="line"><span class="comment"># 测试GitHub连通</span></span><br><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<h1 id="十二、日常标准开发流程（记住这套就能独立开发）"><a href="#十二、日常标准开发流程（记住这套就能独立开发）" class="headerlink" title="十二、日常标准开发流程（记住这套就能独立开发）"></a>十二、日常标准开发流程（记住这套就能独立开发）</h1><h2 id="单人开发流程"><a href="#单人开发流程" class="headerlink" title="单人开发流程"></a>单人开发流程</h2><ol>
+<li>修改代码</li>
+<li><code>git status</code> 查看变更</li>
+<li><code>git add .</code> 加入暂存</li>
+<li><code>git commit -m &quot;更新描述&quot;</code></li>
+<li><code>git pull</code> 拉取远程最新</li>
+<li><code>git push</code> 推送</li>
+</ol>
+<h2 id="多人协作规范流程"><a href="#多人协作规范流程" class="headerlink" title="多人协作规范流程"></a>多人协作规范流程</h2><ol>
+<li><code>git pull</code> 拉取最新代码</li>
+<li>创建功能分支 <code>git switch -c feature/xxx</code></li>
+<li>写代码、提交</li>
+<li>推送分支 <code>git push -u origin feature/xxx</code></li>
+<li>GitHub提交PR合并到main</li>
+<li>合并完成后切回main，<code>git pull</code> 更新本地</li>
+</ol>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2025 - 2026 Luoのblog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Luo-36
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

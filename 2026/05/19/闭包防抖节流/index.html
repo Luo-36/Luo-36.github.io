@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>Luoのblog</title>
+    <title>闭包 防抖 节流 | Luoのblog</title>
     <meta name="author" content="Luo-36" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -39,7 +39,9 @@
 
 
 
-<script src="/js/lib/home.js"></script>
+
+
+
 
 <link rel="stylesheet" href="/css/main.css" />
 
@@ -149,161 +151,77 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="home-head">
-    <div
-        id="home-background"
-        ref="homeBackground"
-        data-images="/images/background.jpg"
-    ></div>
-    <div id="home-info" @click="homeClick">
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="info">
-            <div class="wrap">
-                <h1>Luoのblog</h1>
-                <h3></h3>
-                <h5></h5>
-            </div>
-        </span>
+            <div class="article">
+    <div>
+        <h1>闭包 防抖 节流</h1>
     </div>
-</div>
-<div
-    id="home-posts-wrap"
-    ref="homePostsWrap"
-    true
->
-    <div id="home-posts">
-        <%
-    let posts = site.posts,
-    per_page = config.index_generator?.per_page || 5, 
-    current = (page.current - 1) * per_page;
-    posts.data.sort((a, b) => {
-        let x = a.pinned ?? 0,
-            y = b.pinned ?? 0;
-        return x === y ? b.date - a.date : y - x;
-    });
-    posts = posts.slice(current, per_page + current);
-%>
-<% posts.forEach((post) => { %>
-<div class="post">
-    <a href="<%- url_for(post.path) %>">
-        <h2 class="post-title"><%= post.title %></h2>
-    </a>
-    <div class="category-and-date">
-        <% if (post.categories.data.length !== 0) { %>
-        <span class="category">
-            <a href="<%- url_for(post.categories.data[0].path) %>">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                <%= post.categories.data[0].name %>
-            </a>
-        </span>
-        <% } %>
+    <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            <%- date(post.date, "YYYY/M/D") %>
+            2026/5/19
         </span>
-        <% if (theme.crypto.enable && typeof post.secret !== "undefined") { %>
-        <span class="special">
-            <i class="fa-solid fa-lock fa-fw"></i>
+        
+        <span class="category">
+            <a href="/categories/front-end/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                front-end
+            </a>
         </span>
-        <% } %>
-        <% if (typeof post.pinned !== "undefined") { %>
-        <span class="special">
-            <i class="fa-solid fa-grip-vertical fa-fw"></i>
-        </span>
-        <% } %>
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            <% if (typeof post.description !== "undefined") { %>
-            <!-- 优先显示文章自定义description -->
-            <%- markdown(post.description) %>
-            <% } else if (post.excerpt) { %>
-            <!-- 其次显示<!-- more -->分割的摘要 -->
-            <%- post.excerpt %>
-            <% } else { %>
-            <!-- 最后强制截断全文（取前200字符，避免显示全文） -->
-            <%- post.content.substring(0, 200) + '...' %>
-            <% } %>
-        </div>
-    </div>
-    <div class="post-tags">
-        <% if (post.tags.data.length !== 0) { %>
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        <% } %>
-        <% let prev; %>
-        <% post.tags.data.forEach((tag) => { %>
-        <span class="tag">
-            <%
-                const colors = theme.colors.filter((color) => color !== prev);
-                let id = Math.floor(Math.random() * colors.length);
-                prev = colors[id];
-            %>
-            <a href="<%- url_for(tag.path) %>" style="color: <%- colors[id] %>"><%= tag.name %></a>
-        </span>
-        <% }); %>
-    </div>
-    <a href="<%- url_for(post.path) %>" class="go-post">阅读全文</a>
-</div>
-<% }); %>
-        <div class="page-current">
-    
-    <a class="page-num" href="/">
-        <i class="fa-solid fa-caret-left fa-fw"></i>
-    </a>
-    <a class="page-num" href="/">1</a>
-    <span class="page-omit">...</span>
-    
-    <span class="current">2</span>
-    
-    <a class="page-num" href="/page/3">
-        3
-    </a>
-    
-    
-    
-    
-    <a class="page-num" href="/page/3/">
-        <i class="fa-solid fa-caret-right fa-fw"></i>
-    </a>
-    
-</div>
-
-    </div>
-    
-    <div id="home-card">
-        <div id="card-style">
-    <div id="card-div">
-        <div class="avatar">
-            <img src="/images/avatar.jpg" alt="avatar" />
-        </div>
-        <div class="name">Luo-36</div>
-        <div class="description">
-            <p>一只小白</p>
-
-        </div>
         
         
-        <div class="friend-links">
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
             
-            <div class="friend-link">
-                <a target="_blank" rel="noopener" href="https://github.com/Luo-36">github</a>
-            </div>
             
-        </div>
+            <span class="tag">
+                
+                <a href="/tags/ES6/" style="color: #ffa2c4">
+                    ES6
+                </a>
+            </span>
+            
+        </span>
         
     </div>
-</div>
+    
+    <div class="content" v-pre>
+        <h1 id="闭包-防抖-节流"><a href="#闭包-防抖-节流" class="headerlink" title="闭包 防抖 节流"></a>闭包 防抖 节流</h1><hr>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>闭包是指函数与其周围状态（词法环境）的组合，使得函数可以访问其外部作用域的变量，即使外部函数已经执行完毕并返回。闭包的核心在于词法作用域，即嵌套函数能够捕获并保留其外部函数的变量。</p>
+<p>就是在一个嵌套函数里有一个内部函数使用了外部函数的变量，该内部函数被return到全局，导致该外部函数的变量也被保存在全局（没被销毁）（不可直接访问）</p>
+<p>大致是以下结构：</p>
+<ul>
+<li>外层函数<ul>
+<li>变量a</li>
+<li>内层函数<ul>
+<li>使用变量a，使a++</li>
+</ul>
+</li>
+<li>return内层函数</li>
+</ul>
+</li>
+<li>let res &#x3D; 外层函数 （需要一个变量来接收return的函数，否则会被GC回收机制销毁）</li>
+<li>res();</li>
+<li>res(); 多次调用，变量a累加</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">outer</span>(<span class="params">a</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> num = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">inner</span>(<span class="params"></span>) &#123;</span><br><span class="line">            num++;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(num,a);</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> inner;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> res = <span class="title function_">outer</span>(<span class="number">1</span>);  <span class="comment">//一定要有变量接收</span></span><br><span class="line">    <span class="title function_">res</span>();</span><br><span class="line">    <span class="title function_">res</span>();</span><br><span class="line">    <span class="title function_">res</span>();  <span class="comment">//这时的num一直在累加</span></span><br><span class="line">    <span class="title function_">res</span>();</span><br><span class="line">    res = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
 
+<p>闭包产生的变量和函数需要手动销毁，否则会内存泄漏</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//销毁</span></span><br><span class="line">res = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数()();"></a>立即执行函数()();</h1><h2 id="柯里化"><a href="#柯里化" class="headerlink" title="*柯里化"></a>*柯里化</h2>
     </div>
+    
+    
+    
+    
+    
+    
     
 </div>
 
@@ -335,6 +253,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>
