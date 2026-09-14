@@ -1,0 +1,398 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>Git常用命令 | Luoのblog</title>
+    <meta name="author" content="Luo-36" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING...</h2>
+                    <!-- <p>加载过慢请开启缓存 浏览器默认开启</p> -->
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>LUOのBLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;LUOのBLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>Git常用命令</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/9/14
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E5%A4%87%E6%9F%A5/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                备查
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/Git/" style="color: #03a9f4">
+                    Git
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="Git-完整命令手册"><a href="#Git-完整命令手册" class="headerlink" title="Git 完整命令手册"></a>Git 完整命令手册</h1><blockquote>
+<p>符号约定</p>
+<ul>
+<li><code>&lt;&gt;</code> 代表<strong>需要你自己填入内容</strong></li>
+<li><code>[]</code> 代表可选参数</li>
+<li>⚠️ 高危命令，单人练习仓库可用，多人协作严禁使用</li>
+</ul>
+</blockquote>
+<h2 id="0-【首次安装Git后必做：配置用户名和邮箱】"><a href="#0-【首次安装Git后必做：配置用户名和邮箱】" class="headerlink" title="0. 【首次安装Git后必做：配置用户名和邮箱】"></a>0. 【首次安装Git后必做：配置用户名和邮箱】</h2><blockquote>
+<p>作用：每一条commit提交记录都会带上你的用户名+邮箱，<strong>只需要配置一次</strong>，存在电脑全局，所有git仓库共用。<br>区分：<code>--global</code> 全局配置（推荐）；不带global只对<strong>当前这一个仓库</strong>生效。</p>
+</blockquote>
+<h3 id="0-1-设置全局用户名、邮箱"><a href="#0-1-设置全局用户名、邮箱" class="headerlink" title="0.1 设置全局用户名、邮箱"></a>0.1 设置全局用户名、邮箱</h3><figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line"><span class="meta"># 设置用户名（会显示在github提交记录上，可以和github昵称一致）</span></span><br><span class="line">git config --<span class="keyword">global</span> user.name <span class="string">&quot;&lt;你的名字/github昵称&gt;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># 设置邮箱！必须是你Github账号绑定的邮箱，提交记录才会关联到你的github头像</span></span><br><span class="line">git config --<span class="keyword">global</span> user.email <span class="string">&quot;&lt;github绑定邮箱&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">git config <span class="attr">--global</span> user<span class="selector-class">.name</span> <span class="string">&quot;Luo-36&quot;</span></span><br><span class="line">git config <span class="attr">--global</span> user<span class="selector-class">.email</span> <span class="string">&quot;xxx@qq.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="0-2-查看当前配置（验证是否设置成功）"><a href="#0-2-查看当前配置（验证是否设置成功）" class="headerlink" title="0.2 查看当前配置（验证是否设置成功）"></a>0.2 查看当前配置（验证是否设置成功）</h3><figure class="highlight brainfuck"><table><tr><td class="code"><pre><span class="line"><span class="comment">git config</span> <span class="literal">--</span><span class="comment">global</span> <span class="literal">--</span><span class="comment">list</span></span><br></pre></td></tr></table></figure>
+
+<p>执行后会列出 user.name 和 user.email，确认填写正确。</p>
+<h3 id="0-3-修改-删除配置（备用）"><a href="#0-3-修改-删除配置（备用）" class="headerlink" title="0.3 修改&#x2F;删除配置（备用）"></a>0.3 修改&#x2F;删除配置（备用）</h3><figure class="highlight dsconfig"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 重新覆盖设置，直接再执行一遍上面config命令即可</span></span><br><span class="line"><span class="comment"># 删除全局配置</span></span><br><span class="line"><span class="string">git</span> <span class="string">config</span> <span class="built_in">--global</span> <span class="built_in">--unset</span> <span class="string">user</span>.<span class="string">name</span></span><br><span class="line"><span class="string">git</span> <span class="string">config</span> <span class="built_in">--global</span> <span class="built_in">--unset</span> <span class="string">user</span>.<span class="string">email</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>补充：如果<strong>只有当前这一个仓库想用不同的账号</strong>，去掉 <code>--global</code>，在项目文件夹内执行：</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">git config <span class="keyword">user</span>.name &quot;临时名字&quot;</span><br><span class="line">git config <span class="keyword">user</span>.email &quot;临时邮箱&quot;</span><br></pre></td></tr></table></figure></blockquote>
+<hr>
+<h2 id="一、仓库初始化-远程关联"><a href="#一、仓库初始化-远程关联" class="headerlink" title="一、仓库初始化 &amp; 远程关联"></a>一、仓库初始化 &amp; 远程关联</h2><h3 id="1-git-init"><a href="#1-git-init" class="headerlink" title="1. git init"></a>1. git init</h3><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">git <span class="keyword">init</span></span><br></pre></td></tr></table></figure>
+
+<p>作用：<strong>当前目录创建本地Git仓库，生成隐藏 <code>.git</code> 文件夹</strong><br>参数：无<br>使用：进入项目根目录执行，<strong>一个本地仓库只运行一次</strong>。</p>
+<h3 id="2-git-remote"><a href="#2-git-remote" class="headerlink" title="2. git remote"></a>2. git remote</h3><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 添加远程仓库，origin是远程仓库默认别名</span></span><br><span class="line">git remote <span class="built_in">add</span> origin &lt;远程仓库地址&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看远程仓库信息</span></span><br><span class="line">git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除已绑定的远程仓库</span></span><br><span class="line">git remote <span class="built_in">remove</span> origin</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>origin：远程仓库别名，约定俗成固定叫origin</li>
+<li>&lt;远程仓库地址&gt;：Github仓库 HTTPS &#x2F; SSH链接</li>
+</ul>
+<hr>
+<h2 id="二、文件暂存、提交（日常开发核心）"><a href="#二、文件暂存、提交（日常开发核心）" class="headerlink" title="二、文件暂存、提交（日常开发核心）"></a>二、文件暂存、提交（日常开发核心）</h2><h3 id="1-git-status"><a href="#1-git-status" class="headerlink" title="1. git status"></a>1. git status</h3><figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">status</span></span><br><span class="line">git <span class="built_in">status</span> <span class="comment">--short</span></span><br></pre></td></tr></table></figure>
+
+<p>作用：查看工作区文件状态（新增&#x2F;修改&#x2F;删除，是否加入暂存）<br>参数</p>
+<ul>
+<li><code>--short</code> &#x2F; <code>-s</code>：精简输出，只显示状态码+文件名</li>
+</ul>
+<h3 id="2-git-add"><a href="#2-git-add" class="headerlink" title="2. git add"></a>2. git add</h3><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">add</span> .</span><br><span class="line">git <span class="built_in">add</span> &lt;文件名&gt;</span><br><span class="line">git <span class="built_in">add</span> &lt;文件夹&gt;/</span><br></pre></td></tr></table></figure>
+
+<p>作用：文件从<strong>工作区</strong>加入<strong>暂存区(stage)</strong>，<code>.gitignore</code> 里的文件自动跳过</p>
+<ul>
+<li><code>.</code> ：当前目录全部文件，递归所有子文件夹</li>
+<li><code>&lt;文件名&gt;</code>：单独添加指定文件，例：<code>git add User.java</code></li>
+<li><code>&lt;文件夹&gt;/</code>：添加整个文件夹</li>
+</ul>
+<blockquote>
+<p>⚠️ add只是放到暂存，<strong>还没有提交到本地仓库</strong></p>
+</blockquote>
+<h3 id="3-git-commit"><a href="#3-git-commit" class="headerlink" title="3. git commit"></a>3. git commit</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">git <span class="keyword">commit</span> <span class="operator">-</span>m &quot;&lt;提交备注&gt;&quot;</span><br><span class="line">git <span class="keyword">commit</span> <span class="comment">--amend</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>-m &quot;备注&quot;</code>：必填，填写本次改动描述，清晰记录修改内容</p>
+</li>
+<li><p><code>--amend</code>：修改上一次commit，覆盖上一条提交记录。适合备注写错、漏add文件&gt; </p>
+<blockquote>
+<p>示例：<code>git commit -m &quot;新增Lombok User实体类&quot;</code></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h2 id="三、拉取-推送远程Github"><a href="#三、拉取-推送远程Github" class="headerlink" title="三、拉取 &#x2F; 推送远程Github"></a>三、拉取 &#x2F; 推送远程Github</h2><h3 id="1-git-fetch"><a href="#1-git-fetch" class="headerlink" title="1. git fetch"></a>1. git fetch</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">git <span class="keyword">fetch</span> origin</span><br><span class="line">git <span class="keyword">fetch</span> <span class="operator">-</span>p</span><br></pre></td></tr></table></figure>
+
+<p>作用：<strong>只下载远程分支、提交记录，不会修改本地文件，不会自动合并</strong></p>
+<ul>
+<li>origin：远程仓库别名</li>
+<li><code>-p</code> &#x3D; <code>--prune</code>：修剪，删除本地缓存中远程已经不存在的分支（清理origin&#x2F;main用这个）</li>
+</ul>
+<h3 id="2-git-pull"><a href="#2-git-pull" class="headerlink" title="2. git pull"></a>2. git pull</h3><figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">git pull origin <span class="keyword">master</span></span><br><span class="line"><span class="title">git</span> pull origin <span class="keyword">master</span> <span class="title">--rebase</span></span><br></pre></td></tr></table></figure>
+
+<p>等价 <code>git fetch + git merge</code>，拉取远程master分支并且合并到当前本地分支</p>
+<ul>
+<li><p><code>origin master</code>：拉取origin远程的master分支</p>
+</li>
+<li><p><code>--rebase</code>：变基合并，提交记录为一条直线，多人协作常用&gt; </p>
+<blockquote>
+<p>单人仓库几乎不用pull，多人协作才需要</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="3-git-push"><a href="#3-git-push" class="headerlink" title="3. git push"></a>3. git push</h3><figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> master</span><br><span class="line">git <span class="built_in">push</span> -f <span class="built_in">origin</span> master</span><br><span class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> --<span class="built_in">delete</span> main</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>git push origin master</code>：本地master分支推送到远程origin&#x2F;master，日常上传代码</li>
+<li><code>-f</code> &#x2F; <code>--force</code> ⚠️强制推送：本地分支直接覆盖远程提交历史。<strong>多人项目禁止！仅首次全量替换代码</strong></li>
+<li><code>--delete</code>：删除远程分支，<code>git push origin --delete main</code> 删除远程main分支</li>
+</ul>
+<hr>
+<h2 id="四、分支操作"><a href="#四、分支操作" class="headerlink" title="四、分支操作"></a>四、分支操作</h2><h3 id="1-git-branch"><a href="#1-git-branch" class="headerlink" title="1. git branch"></a>1. git branch</h3><figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">git <span class="keyword">branch </span>                 <span class="comment"># 列出本地分支，*标记当前所在分支</span></span><br><span class="line">git <span class="keyword">branch </span>-r               <span class="comment"># 查看远程追踪分支 origin/xxx</span></span><br><span class="line">git <span class="keyword">branch </span>-a               <span class="comment"># 本地 + 远程所有分支一起展示</span></span><br><span class="line">git <span class="keyword">branch </span>&lt;新分支名&gt;        <span class="comment"># 创建新本地分支，不会自动切换</span></span><br><span class="line">git <span class="keyword">branch </span>-d &lt;分支名&gt;       <span class="comment"># 安全删除本地分支：分支必须已经合并才允许删除</span></span><br><span class="line">git <span class="keyword">branch </span>-D &lt;分支名&gt;       <span class="comment"># 强制删除本地分支，不管是否合并，清理废弃分支</span></span><br></pre></td></tr></table></figure>
+
+<p>示例：<code>git branch -D main</code> 删除本地废弃main分支</p>
+<h3 id="2-切换分支"><a href="#2-切换分支" class="headerlink" title="2. 切换分支"></a>2. 切换分支</h3><figure class="highlight gherkin"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 旧版git写法</span></span><br><span class="line">git checkout <span class="variable">&lt;分支名&gt;</span></span><br><span class="line"><span class="comment"># 新版git推荐写法</span></span><br><span class="line">git switch <span class="variable">&lt;分支名&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>作用：切换本地分支，<strong>会替换当前文件夹内文件！切换前最好commit保存改动</strong><br>示例：<code>git switch master</code></p>
+<h3 id="3-创建并且直接切换到新分支"><a href="#3-创建并且直接切换到新分支" class="headerlink" title="3. 创建并且直接切换到新分支"></a>3. 创建并且直接切换到新分支</h3><figure class="highlight r"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">switch</span> <span class="operator">-</span><span class="built_in">c</span> <span class="operator">&lt;</span>新分支名<span class="operator">&gt;</span></span><br><span class="line"><span class="comment"># 等价旧写法 git checkout -b &lt;新分支名&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-c</code> &#x3D; create，创建分支并立刻切进去</li>
+</ul>
+<h3 id="4-合并分支"><a href="#4-合并分支" class="headerlink" title="4. 合并分支"></a>4. 合并分支</h3><figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">merge</span> &lt;待合并分支名&gt;</span><br><span class="line">git <span class="built_in">merge</span> &lt;分支&gt; <span class="comment">--allow-unrelated-histories</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>--allow-unrelated-histories</code>：合并两条完全没有共同提交历史的分支（你之前main&#x2F;master场景）&gt; </p>
+<blockquote>
+<p>操作流程：切到目标分支(master) → git merge 别的分支 → 解决冲突 → commit → push</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h2 id="五、查看提交日志"><a href="#五、查看提交日志" class="headerlink" title="五、查看提交日志"></a>五、查看提交日志</h2><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br><span class="line">git <span class="built_in">log</span> <span class="comment">--oneline</span></span><br><span class="line">git <span class="built_in">log</span> <span class="comment">--oneline --graph</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>git log</code>：完整提交日志，作者、时间、完整commit哈希</li>
+<li><code>--oneline</code>：单行精简输出，7位短hash+提交备注（最常用）</li>
+<li><code>--graph</code>：绘制分支图形，直观查看分叉合并关系</li>
+</ul>
+<hr>
+<h2 id="六、-gitignore-相关：移除已经提交过的文件"><a href="#六、-gitignore-相关：移除已经提交过的文件" class="headerlink" title="六、.gitignore 相关：移除已经提交过的文件"></a>六、.gitignore 相关：移除已经提交过的文件</h2><blockquote>
+<p>场景：文件已经提交进git，之后想加入ignore。只写.gitignore无效，要从git缓存移除，<strong>保留本地文件</strong></p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">git rm <span class="attr">--cached</span> &lt;文件名&gt;</span><br><span class="line">git rm -<span class="attribute">r</span> <span class="attr">--cached</span> &lt;文件夹名&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>--cached</code>：只从git版本库&#x2F;缓存删除，<strong>电脑本地文件保留</strong></li>
+<li><code>-r</code>：递归，用于文件夹，例如 target、.idea<br>例子：<code>git rm -r --cached project1/target</code></li>
+</ul>
+<blockquote>
+<p>⚠️ 不加<code>--cached</code>的 <code>git rm</code> 会直接删除你电脑上的本地文件！</p>
+</blockquote>
+<hr>
+<h2 id="七、撤销-回滚救命命令"><a href="#七、撤销-回滚救命命令" class="headerlink" title="七、撤销&#x2F;回滚救命命令"></a>七、撤销&#x2F;回滚救命命令</h2><h3 id="1-取消add（已经git-add，但还没commit）"><a href="#1-取消add（已经git-add，但还没commit）" class="headerlink" title="1. 取消add（已经git add，但还没commit）"></a>1. 取消add（已经git add，但还没commit）</h3><figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">reset</span> HEAD .</span><br><span class="line">git <span class="built_in">reset</span> HEAD &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
+
+<p>作用：把暂存区改动撤回工作区，<strong>代码改动保留，仅仅取消add</strong></p>
+<h3 id="2-丢弃未暂存的本地修改（恢复文件到上次commit版本）"><a href="#2-丢弃未暂存的本地修改（恢复文件到上次commit版本）" class="headerlink" title="2. 丢弃未暂存的本地修改（恢复文件到上次commit版本）"></a>2. 丢弃未暂存的本地修改（恢复文件到上次commit版本）</h3><figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">git checkout <span class="comment">-- &lt;文件名&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>⚠️ 本地未保存修改直接丢失，改错文件时用来恢复。</p>
+<h3 id="3-重置本地仓库到指定提交（高危！）"><a href="#3-重置本地仓库到指定提交（高危！）" class="headerlink" title="3. 重置本地仓库到指定提交（高危！）"></a>3. 重置本地仓库到指定提交（高危！）</h3><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">git <span class="keyword">reset</span> <span class="comment">--hard &lt;commit哈希&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>--hard</code>：丢弃所有本地未提交修改，文件直接回退到该提交版本，谨慎使用</p>
+<blockquote>
+<p>commit哈希从 <code>git log --oneline</code> 获取7位字符</p>
+</blockquote>
+<h1 id="✅-单人练习仓库完整标准工作流（从0到上传Github）"><a href="#✅-单人练习仓库完整标准工作流（从0到上传Github）" class="headerlink" title="✅ 单人练习仓库完整标准工作流（从0到上传Github）"></a>✅ 单人练习仓库完整标准工作流（从0到上传Github）</h1><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="meta"># 【第一次，只执行一次】配置全局账号邮箱</span></span><br><span class="line">git config --<span class="keyword">global</span> user.name <span class="string">&quot;Luo-36&quot;</span></span><br><span class="line">git config --<span class="keyword">global</span> user.email <span class="string">&quot;你的github邮箱&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># 进入项目根目录，初始化仓库（仅一次）</span></span><br><span class="line">git <span class="keyword">init</span></span><br><span class="line"><span class="meta"># 绑定远程github仓库（仅一次）</span></span><br><span class="line">git remote <span class="keyword">add</span> origin [https:<span class="comment">//github.com/Luo-36/Luo-s-code.git](https://github.com/Luo-36/Luo-s-code.git)</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># 日常每次更新代码的流程</span></span><br><span class="line">git status</span><br><span class="line">git <span class="keyword">add</span> .</span><br><span class="line">git commit -m <span class="string">&quot;本次更新描述&quot;</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>仅<strong>第一次覆盖远程旧代码</strong>才使用 <code>git push -f origin master</code>，后续不要再加 <code>-f</code></p>
+</blockquote>
+<h1 id="⚠️-避坑清单"><a href="#⚠️-避坑清单" class="headerlink" title="⚠️ 避坑清单"></a>⚠️ 避坑清单</h1><ol>
+<li>切换分支会替换本地文件夹文件，未提交代码先commit保存</li>
+<li><code>-f</code>强制推送、<code>git reset --hard</code>高危，多人项目严禁</li>
+<li><code>.gitignore</code>对<strong>已经提交到git</strong>的文件无效，要用<code>git rm --cached</code></li>
+<li>远程分支、本地分支相互独立：删除远程分支不会自动删除本地分支</li>
+<li>配置邮箱必须是Github绑定邮箱，提交记录才会正常在Github主页展示</li>
+</ol>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2025 - 2026 Luoのblog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Luo-36
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
