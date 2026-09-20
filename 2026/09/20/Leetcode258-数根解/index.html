@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>tags | Luoのblog</title>
+    <title>Leetcode258_数根解 | Luoのblog</title>
     <meta name="author" content="Luo-36" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -34,6 +34,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -147,56 +151,96 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
+            <div class="article">
+    <div>
+        <h1>Leetcode258_数根解</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/9/20
+        </span>
         
-        
-        
-        <span>
-            <a href="/tags/ES6/" style="background: #03a9f4">
+        <span class="category">
+            <a href="/categories/%E5%88%B7%E9%A2%98/">
                 <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                ES6
+                刷题
             </a>
         </span>
         
         
-        
-        <span>
-            <a href="/tags/skill/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                skill
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/algo/" style="color: #ff7d73">
+                    algo
+                </a>
+            </span>
+            
         </span>
-        
-        
-        
-        <span>
-            <a href="/tags/other/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                other
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/algo/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                algo
-            </a>
-        </span>
-        
         
     </div>
+    
+    <div class="content" v-pre>
+        <h1 id="258-各位相加"><a href="#258-各位相加" class="headerlink" title="258. 各位相加"></a>258. 各位相加</h1><p>给定一个非负整数 num，反复将各个位上的数字相加，直到结果为一位数。返回这个结果。</p>
+<ul>
+<li>示例 1:</li>
+</ul>
+<blockquote>
+<p>输入: num &#x3D; 38<br>输出: 2<br>解释: 各位相加的过程为：<br>38 –&gt; 3 + 8 –&gt; 11<br>11 –&gt; 1 + 1 –&gt; 2<br>由于 2 是一位数，所以返回 2。</p>
+</blockquote>
+<ul>
+<li><p>示例 2:</p>
+<blockquote>
+<p>输入: num &#x3D; 0<br>输出: 0</p>
+</blockquote>
+</li>
+<li><p>提示：<br>0 &lt;&#x3D; num &lt;&#x3D; 231 - 1</p>
+</li>
+</ul>
+<p>进阶：你可以不使用循环或者递归，在 O(1) 时间复杂度内解决这个问题吗？</p>
+<h1 id="数根解法O-1"><a href="#数根解法O-1" class="headerlink" title="数根解法O(1)"></a>数根解法O(1)</h1><p>定义：</p>
+<blockquote>
+<p>将一正整数的各个位数相加(即横向相加)后，若加完后的值大于等于10的话，则继续将各位数进行横向相加直到其值小于十为止所得到的数，即为数根。换句话说，数根是将一数字重复做其数字之和，直到其值小于十为止，则所得的值为该数的数根。例如54817的数根为7，因为5+4+8+1+7&#x3D;25，25大于10则再加一次，2+5&#x3D;7，7小于十，则7为54817的数根。</p>
+</blockquote>
+<h2 id="数学原理"><a href="#数学原理" class="headerlink" title="数学原理"></a>数学原理</h2><p>$10 \equiv 1 \pmod9$<br>一个数和它各位数字之和对9取模结果相等。</p>
+<p>直接 <code>n % 9</code> 存在问题：</p>
+<ul>
+<li>非9的倍数：余数就是数字根</li>
+<li>9的倍数：取模得到0，但正确结果应为9</li>
+</ul>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>假设现在给我们的是两位数，比如<strong>13</strong>，$13 &#x3D; 1<em>10^1 + 3</em>10^0$</p>
+<p>我们可以看作是在打包物品，10个为一包，不足十个的视为零散的。<br>这样有：1包 + 3零散 &#x3D; 4， 4就是13的各个数位之和。</p>
+<p>我们发现各个数位和等于<strong>包的数量</strong>+<strong>零散的数量</strong>。</p>
+<p>现在我们改成9个为一包，原来的10个一包的可以多拆出来一个零散的物品。<br>$10 &#x3D; 9 + 1$ , 每包都可以拆出来1个零散，有几包就可以拆出几个零散，所以当我们以九个为一包时可以直接看有几个零散的（10个装里拆出来的加上原来的零散的）。</p>
+<p>$13 \to 1 + 3  \to  (1<em>10^1)%9 + (3</em>10^0)%9 &#x3D; 10%9 + 3%9  &#x3D; 13%9 &#x3D; 4$</p>
+<p>好的，如果给我们的是三位数呢？比如<strong>123</strong>，那我们可以拆成 $123 &#x3D; 1<em>10^2 + 2</em>10^1 + 3<em>10^0 &#x3D; 1</em>(1+99) + 2*(1+9) + 3$</p>
+<p>往后再推也是一样的，所以我们可以得到结论，模9可以得到一个正整数的数根。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>公式：$\boldsymbol{(n-1)%9 +1}$</p>
+<p>原理：先借走1避开余数为0的情况；取模运算结束后再归还1。</p>
+<ul>
+<li>普通数：先减1后加1，结果不变；</li>
+<li>9的倍数：借走1之后产生非0余数，加1后得到9。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">digitalRoot</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (n - <span class="number">1</span>) % <span class="number">9</span> + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>前提：输入为正整数；输入0需单独返回0。</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
     
 </div>
 
@@ -228,6 +272,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>
